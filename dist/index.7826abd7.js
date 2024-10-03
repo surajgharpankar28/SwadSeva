@@ -2957,6 +2957,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _client = require("react-dom/client");
 var _clientDefault = parcelHelpers.interopDefault(_client);
+var _uuid = require("uuid");
 var _appLogoPng = require("./public/app_logo.png");
 var _appLogoPngDefault = parcelHelpers.interopDefault(_appLogoPng);
 /**
@@ -2985,12 +2986,12 @@ var _appLogoPngDefault = parcelHelpers.interopDefault(_appLogoPng);
                     alt: "Logo"
                 }, void 0, false, {
                     fileName: "App.js",
-                    lineNumber: 27,
+                    lineNumber: 29,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 26,
+                lineNumber: 28,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -3001,50 +3002,53 @@ var _appLogoPngDefault = parcelHelpers.interopDefault(_appLogoPng);
                             children: "Home"
                         }, void 0, false, {
                             fileName: "App.js",
-                            lineNumber: 31,
+                            lineNumber: 33,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                             children: "About us"
                         }, void 0, false, {
                             fileName: "App.js",
-                            lineNumber: 32,
+                            lineNumber: 34,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                             children: "Contact us"
                         }, void 0, false, {
                             fileName: "App.js",
-                            lineNumber: 33,
+                            lineNumber: 35,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                             children: "Cart"
                         }, void 0, false, {
                             fileName: "App.js",
-                            lineNumber: 34,
+                            lineNumber: 36,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "App.js",
-                    lineNumber: 30,
+                    lineNumber: 32,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 29,
+                lineNumber: 31,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "App.js",
-        lineNumber: 25,
+        lineNumber: 27,
         columnNumber: 5
     }, undefined);
 };
 _c = Header;
-const RestroCard = ()=>{
+const RestroCard = (props)=>{
+    const { resData } = props;
+    const { name, cuisines, avgRating } = resData?.info;
+    const { deliveryTime } = resData.info?.sla;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "res-card",
         children: [
@@ -3054,46 +3058,726 @@ const RestroCard = ()=>{
                 src: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/FOOD_CATALOG/IMAGES/CMS/2024/4/9/dabf99d0-5c51-480b-9895-bce02d2bde9f_e9ffa04d-e57a-4548-a085-0cc9c2e465cc.JPG"
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 44,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-                children: "Meghana Foods"
-            }, void 0, false, {
-                fileName: "App.js",
-                lineNumber: 49,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
-                children: "Biryani, North Indian"
-            }, void 0, false, {
-                fileName: "App.js",
-                lineNumber: 50,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
-                children: "Ratings : 4.4"
-            }, void 0, false, {
-                fileName: "App.js",
                 lineNumber: 51,
                 columnNumber: 7
             }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
-                children: "Delivery in 35 mins"
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                children: name
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 52,
+                lineNumber: 56,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
+                children: cuisines
+            }, void 0, false, {
+                fileName: "App.js",
+                lineNumber: 57,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
+                children: [
+                    avgRating,
+                    " stars"
+                ]
+            }, void 0, true, {
+                fileName: "App.js",
+                lineNumber: 58,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
+                children: [
+                    "ETA : ",
+                    deliveryTime,
+                    " mins"
+                ]
+            }, void 0, true, {
+                fileName: "App.js",
+                lineNumber: 59,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "App.js",
-        lineNumber: 43,
+        lineNumber: 50,
         columnNumber: 5
     }, undefined);
 };
 _c1 = RestroCard;
+const resList = [
+    {
+        info: {
+            id: "385824",
+            name: "The Belgian Waffle Co.",
+            cloudinaryImageId: "5116a385bac0548e06c33c08350fbf11",
+            locality: "Sinchai Colony",
+            areaName: "Mohan Nagar",
+            costForTwo: "\u20B9200 for two",
+            cuisines: [
+                "Waffle",
+                "Desserts",
+                "Ice Cream",
+                "Beverages"
+            ],
+            avgRating: 4.6,
+            veg: true,
+            parentId: "2233",
+            avgRatingString: "4.6",
+            totalRatingsString: "277",
+            sla: {
+                deliveryTime: 56,
+                lastMileTravel: 11.2,
+                serviceability: "SERVICEABLE",
+                slaString: "55-60 mins",
+                lastMileTravelString: "11.2 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 22:45:00",
+                opened: true
+            },
+            badges: {
+                imageBadges: [
+                    {
+                        imageId: "v1695133679/badges/Pure_Veg111.png",
+                        description: "pureveg"
+                    }
+                ]
+            },
+            isOpen: true,
+            aggregatedDiscountInfoV2: {},
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {
+                        badgeObject: [
+                            {
+                                attributes: {
+                                    description: "pureveg",
+                                    imageId: "v1695133679/badges/Pure_Veg111.png"
+                                }
+                            }
+                        ]
+                    },
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/the-belgian-waffle-co-sinchai-colony-mohan-nagar-rest385824",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    },
+    {
+        info: {
+            id: "234875",
+            name: "Adil Hotel",
+            cloudinaryImageId: "gp1ityra6utvzqn6ghnv",
+            locality: "Rautha Wada",
+            areaName: "Chhindwara Locality",
+            costForTwo: "\u20B9150 for two",
+            cuisines: [
+                "North Indian",
+                "Biryani",
+                "Tandoor"
+            ],
+            avgRating: 4.3,
+            parentId: "27123",
+            avgRatingString: "4.3",
+            totalRatingsString: "1.0K+",
+            sla: {
+                deliveryTime: 44,
+                lastMileTravel: 10.9,
+                serviceability: "SERVICEABLE",
+                slaString: "40-45 mins",
+                lastMileTravelString: "10.9 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 23:00:00",
+                opened: true
+            },
+            badges: {},
+            isOpen: true,
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {},
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            aggregatedDiscountInfoV3: {
+                header: "\u20B9150 OFF",
+                subHeader: "ABOVE \u20B9349",
+                discountTag: "FLAT DEAL"
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/adil-hotel-rautha-wada-chhindwara-locality-rest234875",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    },
+    {
+        info: {
+            id: "774546",
+            name: "Shree Naivedyam",
+            cloudinaryImageId: "2274f59cb8efcfab1f446b195bcbda3b",
+            locality: "Khajri Road",
+            areaName: "Chhindwara City",
+            costForTwo: "\u20B9300 for two",
+            cuisines: [
+                "North Indian",
+                "Chinese",
+                "South Indian",
+                "Pizzas",
+                "Beverages"
+            ],
+            avgRating: 4.3,
+            veg: true,
+            parentId: "428968",
+            avgRatingString: "4.3",
+            totalRatingsString: "59",
+            sla: {
+                deliveryTime: 53,
+                lastMileTravel: 11.7,
+                serviceability: "SERVICEABLE",
+                slaString: "50-55 mins",
+                lastMileTravelString: "11.7 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 23:00:00",
+                opened: true
+            },
+            badges: {},
+            isOpen: true,
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {},
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            aggregatedDiscountInfoV3: {
+                header: "10% OFF",
+                subHeader: "UPTO \u20B940"
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/shree-naivedyam-khajri-road-chhindwara-city-rest774546",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    },
+    {
+        info: {
+            id: "630193",
+            name: "Champaran  Handi Restaurant",
+            cloudinaryImageId: "xph0vf5pvbxjf8xchwjk",
+            locality: "Sinchai Colony",
+            areaName: "Nagpur road",
+            costForTwo: "\u20B9200 for two",
+            cuisines: [
+                "North Indian"
+            ],
+            avgRating: 4.3,
+            parentId: "376324",
+            avgRatingString: "4.3",
+            totalRatingsString: "301",
+            sla: {
+                deliveryTime: 52,
+                lastMileTravel: 11.9,
+                serviceability: "SERVICEABLE",
+                slaString: "50-55 mins",
+                lastMileTravelString: "11.9 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 23:00:00",
+                opened: true
+            },
+            badges: {},
+            isOpen: true,
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {},
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            aggregatedDiscountInfoV3: {
+                header: "40% OFF",
+                subHeader: "UPTO \u20B980"
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/champaran-handi-restaurant-sinchai-colony-nagpur-road-rest630193",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    },
+    {
+        info: {
+            id: "898041",
+            name: "Thikana",
+            cloudinaryImageId: "RX_THUMBNAIL/IMAGES/VENDOR/2024/5/26/78517964-20dc-4e37-92ce-8990deb14ab6_898041.jpg",
+            locality: "RANGLA PUNJAB PARASIA ROAD",
+            areaName: " ADARSH NAGAR CHHINDWARA",
+            costForTwo: "\u20B9250 for two",
+            cuisines: [
+                "Indian"
+            ],
+            avgRating: 3.3,
+            parentId: "215738",
+            avgRatingString: "3.3",
+            totalRatingsString: "4",
+            sla: {
+                deliveryTime: 55,
+                lastMileTravel: 13.6,
+                serviceability: "SERVICEABLE",
+                slaString: "50-55 mins",
+                lastMileTravelString: "13.6 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 23:30:00",
+                opened: true
+            },
+            badges: {},
+            isOpen: true,
+            aggregatedDiscountInfoV2: {},
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {},
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            isNewlyOnboarded: true,
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/thikana-rangla-punjab-parasia-road-adarsh-nagar-chhindwara-rest898041",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    },
+    {
+        info: {
+            id: "151656",
+            name: "Dev International",
+            cloudinaryImageId: "enj3srsnhbltbom2ovvh",
+            locality: "khajri road",
+            areaName: "Mohan Nagar",
+            costForTwo: "\u20B9100 for two",
+            cuisines: [
+                "North Indian",
+                "Chinese",
+                "Fast Food",
+                "Beverages"
+            ],
+            avgRating: 4.3,
+            parentId: "71556",
+            avgRatingString: "4.3",
+            totalRatingsString: "360",
+            sla: {
+                deliveryTime: 59,
+                lastMileTravel: 11.7,
+                serviceability: "SERVICEABLE",
+                slaString: "55-60 mins",
+                lastMileTravelString: "11.7 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 22:30:00",
+                opened: true
+            },
+            badges: {},
+            isOpen: true,
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {},
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            aggregatedDiscountInfoV3: {
+                header: "\u20B9100 OFF",
+                subHeader: "ABOVE \u20B9249",
+                discountTag: "FLAT DEAL"
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/dev-international-khajri-road-mohan-nagar-rest151656",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    },
+    {
+        info: {
+            id: "618037",
+            name: "Jai Ganesh Bhojnalaya",
+            cloudinaryImageId: "yzgqriufpzmloogcn2vl",
+            locality: "Railway Colony",
+            areaName: "Bus stand",
+            costForTwo: "\u20B9200 for two",
+            cuisines: [
+                "North Indian",
+                "South Indian",
+                "Indian",
+                "Chinese"
+            ],
+            avgRating: 3.9,
+            veg: true,
+            parentId: "368432",
+            avgRatingString: "3.9",
+            totalRatingsString: "217",
+            sla: {
+                deliveryTime: 45,
+                lastMileTravel: 11.5,
+                serviceability: "SERVICEABLE",
+                slaString: "45-50 mins",
+                lastMileTravelString: "11.5 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 23:00:00",
+                opened: true
+            },
+            badges: {
+                imageBadges: [
+                    {
+                        imageId: "v1695133679/badges/Pure_Veg111.png",
+                        description: "pureveg"
+                    }
+                ]
+            },
+            isOpen: true,
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {
+                        badgeObject: [
+                            {
+                                attributes: {
+                                    description: "pureveg",
+                                    imageId: "v1695133679/badges/Pure_Veg111.png"
+                                }
+                            }
+                        ]
+                    },
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            aggregatedDiscountInfoV3: {
+                header: "\u20B9150 OFF",
+                subHeader: "ABOVE \u20B9299",
+                discountTag: "FLAT DEAL"
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/jai-ganesh-bhojnalaya-railway-colony-bus-stand-rest618037",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    },
+    {
+        info: {
+            id: "151649",
+            name: "Hotel Sai Nath & Sai Restaurant",
+            cloudinaryImageId: "vkhcohhmqfczycw9vsar",
+            locality: "railway station",
+            areaName: "Chhindwara Locality",
+            costForTwo: "\u20B9200 for two",
+            cuisines: [
+                "North Indian",
+                "South Indian",
+                "Chinese",
+                "Beverages",
+                "Fast Food",
+                "Desserts"
+            ],
+            avgRating: 4.2,
+            veg: true,
+            parentId: "101802",
+            avgRatingString: "4.2",
+            totalRatingsString: "869",
+            sla: {
+                deliveryTime: 47,
+                lastMileTravel: 11.3,
+                serviceability: "SERVICEABLE",
+                slaString: "45-50 mins",
+                lastMileTravelString: "11.3 km",
+                iconType: "ICON_TYPE_EMPTY"
+            },
+            availability: {
+                nextCloseTime: "2024-10-03 22:30:00",
+                opened: true
+            },
+            badges: {
+                imageBadges: [
+                    {
+                        imageId: "v1695133679/badges/Pure_Veg111.png",
+                        description: "pureveg"
+                    }
+                ]
+            },
+            isOpen: true,
+            type: "F",
+            badgesV2: {
+                entityBadges: {
+                    imageBased: {
+                        badgeObject: [
+                            {
+                                attributes: {
+                                    description: "pureveg",
+                                    imageId: "v1695133679/badges/Pure_Veg111.png"
+                                }
+                            }
+                        ]
+                    },
+                    textBased: {},
+                    textExtendedBadges: {}
+                }
+            },
+            aggregatedDiscountInfoV3: {
+                header: "FREE ITEM"
+            },
+            orderabilityCommunication: {
+                title: {},
+                subTitle: {},
+                message: {},
+                customIcon: {}
+            },
+            differentiatedUi: {
+                displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+                differentiatedUiMediaDetails: {
+                    mediaType: "ADS_MEDIA_ENUM_IMAGE",
+                    lottie: {},
+                    video: {}
+                }
+            },
+            reviewsSummary: {},
+            displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+            restaurantOfferPresentationInfo: {},
+            externalRatings: {
+                aggregatedRating: {
+                    rating: "--"
+                }
+            },
+            ratingsDisplayPreference: "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+        },
+        analytics: {
+            context: "seo-data-720a352e-748b-4992-b1b1-48f94f1353bc"
+        },
+        cta: {
+            link: "https://www.swiggy.com/city/chhindwara/hotel-sai-nath-and-sai-restaurant-railway-station-chhindwara-locality-rest151649",
+            text: "RESTAURANT_MENU",
+            type: "WEBLINK"
+        },
+        widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
+    }
+];
+console.log(resList.length);
 const Body = ()=>{
+    console.log(resList);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "body",
         children: [
@@ -3102,87 +3786,27 @@ const Body = ()=>{
                 children: "Search"
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 60,
+                lineNumber: 722,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "restaurant-container",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
+                children: resList.map((restaurant)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {
+                        resData: restaurant
+                    }, (0, _uuid.v4)(), false, {
                         fileName: "App.js",
-                        lineNumber: 62,
-                        columnNumber: 9
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 62,
-                        columnNumber: 24
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 62,
-                        columnNumber: 39
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 62,
-                        columnNumber: 54
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 63,
-                        columnNumber: 9
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 63,
-                        columnNumber: 24
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 63,
-                        columnNumber: 39
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 63,
-                        columnNumber: 54
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 64,
-                        columnNumber: 9
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 64,
-                        columnNumber: 24
-                    }, undefined),
-                    " ",
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(RestroCard, {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 64,
-                        columnNumber: 39
-                    }, undefined)
-                ]
-            }, void 0, true, {
+                        lineNumber: 725,
+                        columnNumber: 11
+                    }, undefined))
+            }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 61,
+                lineNumber: 723,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "App.js",
-        lineNumber: 59,
+        lineNumber: 721,
         columnNumber: 5
     }, undefined);
 };
@@ -3193,18 +3817,18 @@ const AppLayout = ()=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Header, {}, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 73,
+                lineNumber: 735,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Body, {}, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 74,
+                lineNumber: 736,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "App.js",
-        lineNumber: 72,
+        lineNumber: 734,
         columnNumber: 5
     }, undefined);
 };
@@ -3212,7 +3836,7 @@ _c3 = AppLayout;
 const root = (0, _clientDefault.default).createRoot(document.getElementById("root"));
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(AppLayout, {}, void 0, false, {
     fileName: "App.js",
-    lineNumber: 81,
+    lineNumber: 743,
     columnNumber: 13
 }, undefined));
 var _c, _c1, _c2, _c3;
@@ -3226,7 +3850,7 @@ $RefreshReg$(_c3, "AppLayout");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"21dqq","react-dom/client":"lOjBx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react/jsx-dev-runtime":"iTorj","./public/app_logo.png":"ibtAP"}],"21dqq":[function(require,module,exports) {
+},{"react":"21dqq","react-dom/client":"lOjBx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react/jsx-dev-runtime":"iTorj","./public/app_logo.png":"ibtAP","uuid":"j4KJi"}],"21dqq":[function(require,module,exports) {
 "use strict";
 module.exports = require("a569817e6ea559f6");
 
@@ -27675,6 +28299,150 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}]},["APLPM","1xC6H","2Ew96"], "2Ew96", "parcelRequirea35a")
+},{}],"j4KJi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MAX", ()=>(0, _maxJsDefault.default));
+parcelHelpers.export(exports, "NIL", ()=>(0, _nilJsDefault.default));
+parcelHelpers.export(exports, "parse", ()=>(0, _parseJsDefault.default));
+parcelHelpers.export(exports, "stringify", ()=>(0, _stringifyJsDefault.default));
+parcelHelpers.export(exports, "v1", ()=>(0, _v1JsDefault.default));
+parcelHelpers.export(exports, "v1ToV6", ()=>(0, _v1ToV6JsDefault.default));
+parcelHelpers.export(exports, "v3", ()=>(0, _v3JsDefault.default));
+parcelHelpers.export(exports, "v4", ()=>(0, _v4JsDefault.default));
+parcelHelpers.export(exports, "v5", ()=>(0, _v5JsDefault.default));
+parcelHelpers.export(exports, "v6", ()=>(0, _v6JsDefault.default));
+parcelHelpers.export(exports, "v6ToV1", ()=>(0, _v6ToV1JsDefault.default));
+parcelHelpers.export(exports, "v7", ()=>(0, _v7JsDefault.default));
+parcelHelpers.export(exports, "validate", ()=>(0, _validateJsDefault.default));
+parcelHelpers.export(exports, "version", ()=>(0, _versionJsDefault.default));
+var _maxJs = require("./max.js");
+var _maxJsDefault = parcelHelpers.interopDefault(_maxJs);
+var _nilJs = require("./nil.js");
+var _nilJsDefault = parcelHelpers.interopDefault(_nilJs);
+var _parseJs = require("./parse.js");
+var _parseJsDefault = parcelHelpers.interopDefault(_parseJs);
+var _stringifyJs = require("./stringify.js");
+var _stringifyJsDefault = parcelHelpers.interopDefault(_stringifyJs);
+var _v1Js = require("./v1.js");
+var _v1JsDefault = parcelHelpers.interopDefault(_v1Js);
+var _v1ToV6Js = require("./v1ToV6.js");
+var _v1ToV6JsDefault = parcelHelpers.interopDefault(_v1ToV6Js);
+var _v3Js = require("./v3.js");
+var _v3JsDefault = parcelHelpers.interopDefault(_v3Js);
+var _v4Js = require("./v4.js");
+var _v4JsDefault = parcelHelpers.interopDefault(_v4Js);
+var _v5Js = require("./v5.js");
+var _v5JsDefault = parcelHelpers.interopDefault(_v5Js);
+var _v6Js = require("./v6.js");
+var _v6JsDefault = parcelHelpers.interopDefault(_v6Js);
+var _v6ToV1Js = require("./v6ToV1.js");
+var _v6ToV1JsDefault = parcelHelpers.interopDefault(_v6ToV1Js);
+var _v7Js = require("./v7.js");
+var _v7JsDefault = parcelHelpers.interopDefault(_v7Js);
+var _validateJs = require("./validate.js");
+var _validateJsDefault = parcelHelpers.interopDefault(_validateJs);
+var _versionJs = require("./version.js");
+var _versionJsDefault = parcelHelpers.interopDefault(_versionJs);
+
+},{"./max.js":false,"./nil.js":false,"./parse.js":false,"./stringify.js":false,"./v1.js":false,"./v1ToV6.js":false,"./v3.js":false,"./v4.js":"8zJtu","./v5.js":false,"./v6.js":false,"./v6ToV1.js":false,"./v7.js":false,"./validate.js":false,"./version.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5Y9F1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "unsafeStringify", ()=>unsafeStringify);
+var _validateJs = require("./validate.js");
+var _validateJsDefault = parcelHelpers.interopDefault(_validateJs);
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */ var byteToHex = [];
+for(var i = 0; i < 256; ++i)byteToHex.push((i + 0x100).toString(16).slice(1));
+function unsafeStringify(arr, offset = 0) {
+    // Note: Be careful editing this code!  It's been tuned for performance
+    // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+    //
+    // Note to future-self: No, you can't remove the `toLowerCase()` call.
+    // REF: https://github.com/uuidjs/uuid/pull/677#issuecomment-1757351351
+    return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+}
+function stringify(arr, offset = 0) {
+    var uuid = unsafeStringify(arr, offset);
+    // Consistency check for valid UUID.  If this throws, it's likely due to one
+    // of the following:
+    // - One or more input array values don't map to a hex octet (leading to
+    // "undefined" in the uuid)
+    // - Invalid input values for the RFC `version` or `variant` fields
+    if (!(0, _validateJsDefault.default)(uuid)) throw TypeError("Stringified UUID is invalid");
+    return uuid;
+}
+exports.default = stringify;
+
+},{"./validate.js":"eHPgI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eHPgI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _regexJs = require("./regex.js");
+var _regexJsDefault = parcelHelpers.interopDefault(_regexJs);
+function validate(uuid) {
+    return typeof uuid === "string" && (0, _regexJsDefault.default).test(uuid);
+}
+exports.default = validate;
+
+},{"./regex.js":"bUa5g","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bUa5g":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+exports.default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8zJtu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _nativeJs = require("./native.js");
+var _nativeJsDefault = parcelHelpers.interopDefault(_nativeJs);
+var _rngJs = require("./rng.js");
+var _rngJsDefault = parcelHelpers.interopDefault(_rngJs);
+var _stringifyJs = require("./stringify.js");
+function v4(options, buf, offset) {
+    if ((0, _nativeJsDefault.default).randomUUID && !buf && !options) return (0, _nativeJsDefault.default).randomUUID();
+    options = options || {};
+    var rnds = options.random || (options.rng || (0, _rngJsDefault.default))();
+    // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+    rnds[6] = rnds[6] & 0x0f | 0x40;
+    rnds[8] = rnds[8] & 0x3f | 0x80;
+    // Copy bytes to buffer, if provided
+    if (buf) {
+        offset = offset || 0;
+        for(var i = 0; i < 16; ++i)buf[offset + i] = rnds[i];
+        return buf;
+    }
+    return (0, _stringifyJs.unsafeStringify)(rnds);
+}
+exports.default = v4;
+
+},{"./native.js":"lYayS","./rng.js":"2psyE","./stringify.js":"5Y9F1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lYayS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var randomUUID = typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
+exports.default = {
+    randomUUID
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2psyE":[function(require,module,exports) {
+// Unique ID creation requires a high quality random # generator. In the browser we therefore
+// require the crypto API and do not support built-in fallback to lower quality random number
+// generators (like Math.random()).
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>rng);
+var getRandomValues;
+var rnds8 = new Uint8Array(16);
+function rng() {
+    // lazy load so that environments that need to polyfill have a chance to do so
+    if (!getRandomValues) {
+        // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation.
+        getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto);
+        if (!getRandomValues) throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
+    }
+    return getRandomValues(rnds8);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["APLPM","1xC6H","2Ew96"], "2Ew96", "parcelRequirea35a")
 
 //# sourceMappingURL=index.7826abd7.js.map
