@@ -3047,7 +3047,7 @@ var _appLogoPngDefault = parcelHelpers.interopDefault(_appLogoPng);
 _c = Header;
 const RestroCard = (props)=>{
     const { resData } = props;
-    const { name, cuisines, avgRating } = resData?.info;
+    const { name, cuisines, avgRating, cloudinaryImageId } = resData?.info;
     const { deliveryTime } = resData.info?.sla;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "res-card",
@@ -3055,7 +3055,7 @@ const RestroCard = (props)=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                 className: "res-img",
                 alt: "res-img",
-                src: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/FOOD_CATALOG/IMAGES/CMS/2024/4/9/dabf99d0-5c51-480b-9895-bce02d2bde9f_e9ffa04d-e57a-4548-a085-0cc9c2e465cc.JPG"
+                src: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + cloudinaryImageId
             }, void 0, false, {
                 fileName: "App.js",
                 lineNumber: 51,
@@ -3065,14 +3065,14 @@ const RestroCard = (props)=>{
                 children: name
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 56,
+                lineNumber: 59,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
                 children: cuisines
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 57,
+                lineNumber: 60,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
@@ -3082,7 +3082,7 @@ const RestroCard = (props)=>{
                 ]
             }, void 0, true, {
                 fileName: "App.js",
-                lineNumber: 58,
+                lineNumber: 61,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h5", {
@@ -3093,7 +3093,7 @@ const RestroCard = (props)=>{
                 ]
             }, void 0, true, {
                 fileName: "App.js",
-                lineNumber: 59,
+                lineNumber: 62,
                 columnNumber: 7
             }, undefined)
         ]
@@ -3786,7 +3786,7 @@ const Body = ()=>{
                 children: "Search"
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 722,
+                lineNumber: 724,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -3795,18 +3795,18 @@ const Body = ()=>{
                         resData: restaurant
                     }, (0, _uuid.v4)(), false, {
                         fileName: "App.js",
-                        lineNumber: 725,
+                        lineNumber: 727,
                         columnNumber: 11
                     }, undefined))
             }, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 723,
+                lineNumber: 725,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "App.js",
-        lineNumber: 721,
+        lineNumber: 723,
         columnNumber: 5
     }, undefined);
 };
@@ -3817,18 +3817,18 @@ const AppLayout = ()=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Header, {}, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 735,
+                lineNumber: 737,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Body, {}, void 0, false, {
                 fileName: "App.js",
-                lineNumber: 736,
+                lineNumber: 738,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "App.js",
-        lineNumber: 734,
+        lineNumber: 736,
         columnNumber: 5
     }, undefined);
 };
@@ -3836,7 +3836,7 @@ _c3 = AppLayout;
 const root = (0, _clientDefault.default).createRoot(document.getElementById("root"));
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(AppLayout, {}, void 0, false, {
     fileName: "App.js",
-    lineNumber: 743,
+    lineNumber: 745,
     columnNumber: 13
 }, undefined));
 var _c, _c1, _c2, _c3;

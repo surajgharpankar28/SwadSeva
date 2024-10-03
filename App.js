@@ -43,7 +43,7 @@ const Header = () => {
 const RestroCard = (props) => {
   const { resData } = props;
 
-  const { name, cuisines, avgRating } = resData?.info;
+  const { name, cuisines, avgRating, cloudinaryImageId } = resData?.info;
   const { deliveryTime } = resData.info?.sla;
 
   return (
@@ -51,7 +51,10 @@ const RestroCard = (props) => {
       <img
         className="res-img"
         alt="res-img"
-        src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/FOOD_CATALOG/IMAGES/CMS/2024/4/9/dabf99d0-5c51-480b-9895-bce02d2bde9f_e9ffa04d-e57a-4548-a085-0cc9c2e465cc.JPG"
+        src={
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+          cloudinaryImageId
+        }
       />
       <h3>{name}</h3>
       <h4>{cuisines}</h4>
@@ -60,7 +63,6 @@ const RestroCard = (props) => {
     </div>
   );
 };
-
 
 const resList = [
   {
