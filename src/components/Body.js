@@ -1,9 +1,8 @@
 import SearchBar from "./SearchBar";
-import { v4 as uuidv4 } from "uuid";
 import RestroCard from "./RestroCard";
-// import resList from "../utils/reslist.js";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer.js";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   //Local State variable - Super powerful variable
@@ -17,7 +16,7 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
@@ -109,7 +108,12 @@ const Body = () => {
           <Shimmer />
         ) : (
           filteredRestaurants.map((restaurant) => (
-            <RestroCard key={uuidv4()} resData={restaurant} />
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurants/" + restaurant.info.id}
+            >
+              <RestroCard resData={restaurant} />
+            </Link>
           ))
         )}
       </div>
