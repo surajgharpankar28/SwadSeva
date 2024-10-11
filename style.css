@@ -60,3 +60,9 @@
 .login-btn {
   border-radius: 5px;
 }
+
+.user-card {
+  padding: 10px;
+  border: 1px solid black;
+  margin-bottom: 1rem;
+}

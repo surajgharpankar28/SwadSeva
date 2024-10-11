@@ -12,6 +12,7 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
+    console.log("useEffect - " + listofRestaurants);
   }, []);
 
   const fetchData = async () => {
@@ -20,10 +21,11 @@ const Body = () => {
     );
 
     const json = await data.json();
-
+    console.log("json - " + json);
     setListofRestaurants(
       json.data.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+
     setFilteredRestaurants(
       json.data.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -108,12 +110,7 @@ const Body = () => {
           <Shimmer />
         ) : (
           filteredRestaurants.map((restaurant) => (
-            <Link
-              key={restaurant.info.id}
-              to={"/restaurants/" + restaurant.info.id}
-            >
-              <RestroCard resData={restaurant} />
-            </Link>
+            <RestroCard resData={restaurant} key={restaurant.info.id} />
           ))
         )}
       </div>

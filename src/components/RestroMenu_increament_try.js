@@ -22,29 +22,30 @@ const RestroMenu = () => {
     setResInfo(json.data);
   };
 
+  const [currCard, setCurrCard] = useState(0);
+  console.log("Current Card - " + currCard);
   const { name, cuisines, costForTwoMessage } =
     resInfo?.cards[2]?.card?.card?.info || {};
 
-  const cards =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
-
-  //let itemCards;
-
-  for (let i = 0; i < cards.length; i++) {
-    if (cards[i]?.card?.card?.itemCards) {
-      itemCards = cards[i].card.card.itemCards;
-      console.log("At Card - " + i);
-      break;
-    }
-  }
-
   const { itemCards } =
-  resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card ||
-  resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card ||
-  {};
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[currCard].card
+      ?.card || {};
 
-  if (!itemCards) {
-    console.log("itemCards are not defined in any card");
+  if (itemCards === undefined) {
+    console.log("itemCards are not defined");
+    if (
+      currCard <
+      resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.card?.length - 1
+    ) {
+      // Use functional setState to ensure the latest value of currCard is used
+      setCurrCard(2);
+      console.log("1234567890afsdjvfsdbj");
+    } else {
+      console.log("Reached the end of cards, stopping.");
+      // Handle the case when no more cards exist.
+    }
+  } else {
+    console.log("itemCards are defined");
   }
 
   console.log("Cuisines : " + cuisines);

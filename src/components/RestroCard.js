@@ -17,14 +17,16 @@ const RestroCard = (props) => {
         src={CON_URL + cloudinaryImageId}
       />
       <h3>{name}</h3>
-      <h1>{id}</h1>
-      <h4>{cuisines}</h4>
+      {/* <h1>{id}</h1> */}
+      <h5>{cuisines.join(", ")}</h5>
       <h5>{avgRating} stars</h5>
       <h5>ETA : {deliveryTime} mins</h5>
       <button>
-        <Link to={"/restaurants/" + { resId }}>View Menu</Link>
+        <Link to={"/restaurants/" + id}>View Menu</Link>
       </button>
     </div>
   );
 };
 export default RestroCard;
+
+
