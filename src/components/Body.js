@@ -12,7 +12,6 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-    console.log("useEffect - " + listofRestaurants);
   }, []);
 
   const fetchData = async () => {
@@ -21,7 +20,6 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log("json - " + json);
     setListofRestaurants(
       json.data.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
