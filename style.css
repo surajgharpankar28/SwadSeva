@@ -18,3 +18,33 @@
   padding: 10px;
   margin: 10px;
 }
+.restaurant-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.res-img {
+  width: 100%;
+  border-radius: 10px;
+}
+.res-card {
+  padding: 10px;
+  margin: 5px;
+  width: 200px;
+  height: 450px;
+  background-color: bisque;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.shimmer-card {
+  width: 200px;
+  height: 450px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
