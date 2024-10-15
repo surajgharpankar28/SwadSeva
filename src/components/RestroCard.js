@@ -23,7 +23,9 @@ const RestroCard = (props) => {
         <h5>{avgRating} stars</h5>
         <h5>ETA : {deliveryTime} mins</h5>
         <button>
-          <Link to={"/restaurants/" + id}>View Menu</Link>
+          <Link target="_blank" to={"/restaurants/" + id}>
+            View Menu
+          </Link>
         </button>
       </div>
     </div>
