@@ -1,8 +1,14 @@
 import React from "react";
 import AppLog from "/public/app_logo.png";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Header = () => {
+  const [btnName, setbtnName] = useState("Login");
+
+  const onlineStatus = useOnlineStatus();
+
   return (
     <div className="header">
       <div>
@@ -10,6 +16,8 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>{onlineStatus ? "✅" : "Offline 🔴"}</li>
+
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -21,7 +29,15 @@ const Header = () => {
           </li>
           <li>Cart</li>
           <li>
-            <button>Login</button>
+            <button
+              className="login-btn"
+              onClick={() => {
+                btnName == "Login" ? setbtnName("Logout") : setbtnName("Login");
+                console.log("btn clicked : " + btnName);
+              }}
+            >
+              {btnName}
+            </button>
           </li>
         </ul>
       </div>
