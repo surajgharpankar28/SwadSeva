@@ -10,12 +10,14 @@ import Error from "./components/Error";
 import User from "./components/User";
 import UserClass from "./components/UserClass";
 import RestroMenu from "./components/RestroMenu";
+import Footer from "./components/Footer";
 
 const AppLayout = () => {
   return (
     <div className="App">
       <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 };
@@ -41,10 +43,10 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-        {
-          path: "/restaurants/:resId",
-          element: <RestroMenu />,
-        },
+      {
+        path: "/restaurants/:resId",
+        element: <RestroMenu />,
+      },
     ],
     errorElement: <Error />,
   },

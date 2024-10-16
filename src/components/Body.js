@@ -43,17 +43,19 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex items-center">
+        <div className="search px-4">
           <div>
             <form onSubmit={handleSubmit}>
               <input
+                className="pl-1 border borer-solid border-black rounded-lg"
                 type="text"
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={handleSearch}
               />
               <button
+                className="px-4 py-1 bg-green-200 m-4 rounded-lg"
                 type="submit"
                 onClick={() => {
                   //filter logic
@@ -72,9 +74,9 @@ const Body = () => {
             </form>
           </div>
         </div>
-        <div className="filter-btns">
+        <div className="items-center m-4 px-4">
           <button
-            className="top-rated-btn"
+            className="px-4 py-2 bg-gray-200 rounded-lg"
             onClick={() => {
               console.log("Button Clicked");
               //filter logic
@@ -88,7 +90,7 @@ const Body = () => {
             Top Rated Restaurant
           </button>
           <button
-            className="top-rated-btn"
+            className="top-rated-btn px-4 underline"
             onClick={() => {
               console.log("Button Clicked");
               //filter logic
@@ -99,7 +101,7 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="restaurant-container">
+      <div className="restaurant-container flex flex-wrap justify-center">
         {listofRestaurants.length === 0 ? (
           <Shimmer />
         ) : (

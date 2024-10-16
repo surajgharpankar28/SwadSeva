@@ -9,16 +9,16 @@ const RestroCard = (props) => {
     resData?.info;
 
   return (
-    <div className="res-card">
-      <div>
+    <div className="m-4 p-4 w-[250px] bg-gray-100 rounded-lg hover:shadow-xl dark:bg-gray-600 dark:text-white">
+      <div className="h-50">
         <img
-          className="res-img"
+          className="rounded-lg"
           alt="res-img"
           src={CON_URL + cloudinaryImageId}
         />
       </div>
       <div>
-        <h3>{name}</h3>
+        <h3 className="font-bold py-1.5 text-lg">{name}</h3>
         <h5>{cuisines.join(", ")}</h5>
         <h5>{avgRating} stars</h5>
         <h5>ETA : {deliveryTime} mins</h5>
