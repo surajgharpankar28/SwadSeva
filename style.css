@@ -14,9 +14,17 @@
   display: flex;
   list-style: none;
 }
+
 .nav-items > ul > li {
   padding: 10px;
   margin: 10px;
+}
+
+.search {
+  padding: 10px;
+}
+.filter {
+  padding: 10px;
 }
 .restaurant-container {
   display: flex;
