@@ -9,7 +9,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import User from "./components/User";
 import UserClass from "./components/UserClass";
-import RestroMenu from "./components/RestroMenu";
+import RestroMenu from "./components/RestroPage";
 import Footer from "./components/Footer";
 
 const AppLayout = () => {
