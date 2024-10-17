@@ -43,24 +43,24 @@ const Body = () => {
       const card = cards[i]?.card?.card;
 
       // Set listOfRestaurants and filteredRestaurants
-      if (!listOfRestaurants && card?.id == "restaurant_grid_listing") {
+      if (
+        !listOfRestaurants &&
+        card?.gridElements?.infoWithStyle?.restaurants
+      ) {
         listOfRestaurants = card.gridElements.infoWithStyle.restaurants;
         filteredRestaurants = card.gridElements.infoWithStyle.restaurants;
       }
-      if (card.id == "popular_restaurants_title") {
-        cityRestro = card.title;
-      }
 
       // Set curatedFoodType from the first valid card (with gridElements)
-      if (!curatedFoodType && card?.id == "whats_on_your_mind") {
+      if (!curatedFoodType && card?.gridElements?.infoWithStyle?.info) {
         curatedFoodType = card;
         curatedFoodType_Cards = card.gridElements.infoWithStyle.info;
       }
 
       // Set topInCity and topInCityRestro_Cards
-      if (!topInCity && card?.id == "top_brands_for_you") {
+      if (!topInCity && card?.gridElements?.infoWithStyle?.restaurants) {
         topInCity = card;
-        topInCityRestro_Cards = card.gridElements?.infoWithStyle?.restaurants;
+        topInCityRestro_Cards = card?.gridElements?.infoWithStyle?.restaurants;
       }
 
       // Set cityRestro (this assumes it follows a similar pattern)
@@ -98,11 +98,10 @@ const Body = () => {
     }
 
     // Log the data for debugging
-
+    console.log("List of Restaurants:", listOfRestaurants);
     console.log("Curated Food Type:", curatedFoodType);
     console.log("Top in City:", topInCity);
     console.log("Top in City - Cards:", topInCityRestro_Cards);
-    console.log("List of Restaurants:", listOfRestaurants);
     console.log("City Restro:", cityRestro);
 
     //curatedFoodType_Cards = curatedFoodType.gridElements?.infoWithStyle?.info;
@@ -221,7 +220,7 @@ const Body = () => {
         <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-8"></hr>
 
         <div className="TopInCity-container flex flex-wrap justify-center">
-          {curatedFoodType.length === 0 ? (
+          {topInCity.length === 0 ? (
             <div>No Top in City</div>
           ) : (
             <>
@@ -262,7 +261,7 @@ const Body = () => {
             <div className="titleDiv">
               <div>
                 <h2 className="title pl-4 pt-4 pb-1 font-bold text-xl">
-                  {cityRestro}
+                  {cityRestro.title}
                 </h2>
                 <div></div>
               </div>
