@@ -16,6 +16,17 @@ const Body = () => {
 
   const [topInCityRestro_Cards, setTopInCityRestro_Cards] = useState([]);
 
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Function to toggle visibility
+  const showComponent = () => {
+    setIsVisible(true); // Set to true
+  };
+
+  const hideComponent = () => {
+    setIsVisible(false); // Set to false
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -47,9 +58,6 @@ const Body = () => {
         listOfRestaurants = card.gridElements.infoWithStyle.restaurants;
         filteredRestaurants = card.gridElements.infoWithStyle.restaurants;
       }
-      if (card.id == "popular_restaurants_title") {
-        cityRestro = card.title;
-      }
 
       // Set curatedFoodType from the first valid card (with gridElements)
       if (!curatedFoodType && card?.id == "whats_on_your_mind") {
@@ -63,9 +71,13 @@ const Body = () => {
         topInCityRestro_Cards = card.gridElements?.infoWithStyle?.restaurants;
       }
 
-      // Set cityRestro (this assumes it follows a similar pattern)
-      if (!cityRestro) {
-        cityRestro = card;
+      // Set cityRestro
+      // if (!cityRestro) {
+      //   cityRestro = card;
+      // }
+
+      if (!cityRestro && card.id == "popular_restaurants_title") {
+        cityRestro = card.title;
       }
 
       // If all needed data is found, break the loop
@@ -98,15 +110,11 @@ const Body = () => {
     }
 
     // Log the data for debugging
-
     console.log("Curated Food Type:", curatedFoodType);
     console.log("Top in City:", topInCity);
     console.log("Top in City - Cards:", topInCityRestro_Cards);
     console.log("List of Restaurants:", listOfRestaurants);
     console.log("City Restro:", cityRestro);
-
-    //curatedFoodType_Cards = curatedFoodType.gridElements?.infoWithStyle?.info;
-    //topInCityRestro_Cards = json.data.cards[1].card?.card.gridElements?.infoWithStyle?.restaurants;
   };
 
   //search-bar
@@ -121,8 +129,12 @@ const Body = () => {
     console.log("Search Term:", searchTerm);
   };
 
+  const clearSearchInput = () => {
+    setSearchTerm("");
+  };
+
   return (
-    <div className="body">
+    <div className="body mx-auto max-w-[80%] ">
       <main>
         <div className="filter flex items-center">
           <div className="search px-4">
@@ -131,7 +143,7 @@ const Body = () => {
                 <input
                   className="pl-1 border borer-solid border-black rounded-lg"
                   type="text"
-                  placeholder="Search..."
+                  placeholder="search restaurant"
                   value={searchTerm}
                   onChange={handleSearch}
                 />
@@ -148,6 +160,9 @@ const Body = () => {
                     console.log("Button Clicked");
                     setFilteredRestaurants(filteredList);
                     console.log(filteredList);
+                    if (searchTerm) {
+                      hideComponent();
+                    }
                   }}
                 >
                   Search
@@ -162,8 +177,9 @@ const Body = () => {
                 console.log("Button Clicked");
                 //filter logic
                 const filteredList = listofRestaurants.filter(
-                  (res) => res.info.avgRating > 4.1
+                  (res) => res.info.avgRating > 4.3
                 );
+                hideComponent();
                 setFilteredRestaurants(filteredList);
                 console.log(filteredList);
               }}
@@ -176,9 +192,11 @@ const Body = () => {
                 console.log("Button Clicked");
                 //filter logic
                 setFilteredRestaurants(listofRestaurants);
+                showComponent();
+                clearSearchInput();
               }}
             >
-              Clear Filter
+              Clear
             </button>
           </div>
         </div>
@@ -187,81 +205,88 @@ const Body = () => {
           {curatedFoodType.length === 0 ? (
             <div>No Curated</div>
           ) : (
-            <>
-              <div className="p-4 overflow-hidden">
-                <div className="titleDiv">
-                  <div>
-                    <h2 className="title pl-4 pt-4 pb-1 font-bold text-xl">
-                      {curatedFoodType.header?.title}
-                    </h2>
-                    <div></div>
-                  </div>
-                </div>
-                <div className="relative w-full">
-                  <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
-                    <div className="row flex">
-                      {curatedFoodType_Cards.map((curated) => (
-                        <div key={curated.id}>
-                          <CuratedFoodType
-                            curatedData={curated}
-                            key={curated.imageGridCards?.info[0]?.id}
-                          />
-                        </div>
-                      ))}
+            isVisible && (
+              <>
+                <div className="p-4 overflow-hidden">
+                  <div className="titleDiv">
+                    <div>
+                      <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
+                        {curatedFoodType.header?.title}
+                      </h2>
+                      <div></div>
                     </div>
                   </div>
 
-                  {}
+                  <div className="relative w-full ">
+                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
+                      <div className="row flex">
+                        {curatedFoodType_Cards.map((curated) => (
+                          <div key={curated.id}>
+                            <CuratedFoodType
+                              curatedData={curated}
+                              key={curated.imageGridCards?.info[0]?.id}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </>
+              </>
+            )
           )}
         </div>
 
-        <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-8"></hr>
+        {isVisible ? (
+          <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-2" />
+        ) : null}
 
         <div className="TopInCity-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 ? (
             <div>No Top in City</div>
           ) : (
-            <>
-              <div className="p-4 overflow-hidden">
-                <div className="titleDiv">
-                  <div>
-                    <h2 className="title pl-4 pt-4 pb-1 font-bold text-xl">
-                      {topInCity.header?.title}
-                    </h2>
-                    <div></div>
-                  </div>
-                </div>
-                <div className="relative w-full">
-                  <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
-                    <div className="row flex">
-                      {topInCityRestro_Cards.map((topInCity) => (
-                        <div key={topInCity.id}>
-                          <RestroCard
-                            resData={topInCity}
-                            key={topInCity.imageGridCards?.info[0]?.id}
-                          />
-                        </div>
-                      ))}
+            isVisible && (
+              <>
+                <div className="p-4 overflow-hidden">
+                  <div className="titleDiv">
+                    <div>
+                      <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
+                        {topInCity.header?.title}
+                      </h2>
+                      <div></div>
                     </div>
                   </div>
+                  <div className="relative w-full">
+                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
+                      <div className="row flex">
+                        {topInCityRestro_Cards.map((topInCity) => (
+                          <div key={topInCity.id}>
+                            <RestroCard
+                              resData={topInCity}
+                              key={topInCity.imageGridCards?.info[0]?.id}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
 
-                  {}
+                    {}
+                  </div>
                 </div>
-              </div>
-            </>
+              </>
+            )
           )}
         </div>
 
-        <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-8"></hr>
+        {isVisible ? (
+          <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-2" />
+        ) : null}
 
         <div className="restaurant-container">
           <div className="p-4 overflow-hidden">
             <div className="titleDiv">
               <div>
-                <h2 className="title pl-4 pt-4 pb-1 font-bold text-xl">
+                <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
                   {cityRestro}
                 </h2>
                 <div></div>

@@ -2,52 +2,57 @@ import React from "react";
 import { CON_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 
-const RestroCard = (props) => {
-  const { resData } = props;
-
+const RestroCard = ({ resData }) => {
   const {
     id,
     name,
-    cuisines,
+    cuisines = [],
     avgRating,
     cloudinaryImageId,
     deliveryTime,
     areaName,
-  } = resData?.info;
+    aggregatedDiscountInfoV3,
+  } = resData?.info || {};
+
+  // Utility function to render discount info
+  const renderDiscountInfo = () => {
+    const { header, subHeader } = aggregatedDiscountInfoV3 || {};
+    return header || subHeader ? `${header || ""} ${subHeader || ""}` : "";
+  };
+
+  // Utility function to format cuisines
+  const formatCuisines = () => {
+    const cuisineString = cuisines.join(", ");
+    return cuisineString.length > 30
+      ? `${cuisineString.slice(0, 30)}...`
+      : cuisineString;
+  };
 
   return (
-    <Link target="_blank" to={"/restaurants/" + id}>
-      <div className="pr-8 pl-4">
+    <div className="pr-8 pl-4 pb-6">
+      <Link target="_blank" to={`/restaurants/${id}`}>
         <div className="sc-etVdmn aNris w-[15rem] h-auto">
           <div className="sc-eNSrOW hqryrO grid transition duration-50 gap-3 grid-flow-row justify-stretch items-center p-0 cursor-pointer">
-            <div className="sc-cWSHoV jdRrlh relative ">
-              <div className="sc-eBMEME hkLgGF  top-0 left-0 w-full ">
+            <div className="sc-cWSHoV jdRrlh relative">
+              <div className="sc-eBMEME hkLgGF top-0 left-0 w-full">
                 <div className="w-full h-full sc-dtInlm eNZkiz relative rounded-lg overflow-hidden">
                   <img
-                    className="sc-bXCLTC jRHowI w-full h-40 object-cover "
-                    src={CON_URL + cloudinaryImageId}
+                    className="sc-bXCLTC jRHowI w-full h-40 object-cover"
+                    src={`${CON_URL}${cloudinaryImageId}`}
                     alt={name}
                   />
-                  <div className="sc-dtBdUo gzvYBM sc-kOPcWz fFPUzA absolute bottom-0 right-0 left-0 grid content-end text-left px-3 pb-2 h-[81px] bg-gradient-to-b from-transparent to-[#1B1E24] [background:linear-gradient(rgba(27,30,36,0)0%,rgb(27,30,36)84.21%)]">
+                  <div className="sc-dtBdUo gzvYBM sc-kOPcWz fFPUzA absolute bottom-0 right-0 left-0 grid content-end text-left px-3 pb-2 h-[81px] bg-gradient-to-b from-transparent to-[#1B1E24]">
                     <div className="sc-aXZVg jJrxcx sc-kOHTFB jKfDUb uppercase font-[ProximaNovaCond] font-extrabold text-[16px] leading-[16px] tracking-[-0.4px] text-[rgba(255,255,255,0.92)] overflow-hidden w-full block break-words line-clamp-1"></div>
                     <div className="sc-aXZVg kUePhA sc-kOHTFB jKfDUb text-white font-bold">
-                      {resData.info.aggregatedDiscountInfoV3?.header ||
-                      resData.info.aggregatedDiscountInfoV3?.subHeader
-                        ? resData.info.aggregatedDiscountInfoV3?.header +
-                          " " +
-                          resData.info.aggregatedDiscountInfoV3?.subHeader
-                        : ""}
+                      {renderDiscountInfo()}
                     </div>
-                    <div className=""></div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="ml-3">
-              <div>
-                <div className="font-bold text-lg">{name}</div>
-              </div>
+              <div className="font-bold text-lg">{name}</div>
 
               <div className="sw-restaurant-card-subtext-container grid items-center mt-0.5 gap-0.5 grid-flow-col justify-start">
                 <div className="mt-[-2px]">
@@ -58,8 +63,6 @@ const RestroCard = (props) => {
                     fill="none"
                     role="img"
                     aria-hidden="true"
-                    strokeColor="rgba(2, 6, 12, 0.92)"
-                    fillColor="rgba(2, 6, 12, 0.92)"
                   >
                     <circle
                       cx="10"
@@ -93,18 +96,18 @@ const RestroCard = (props) => {
               </div>
 
               <div className="sw-restaurant-card-descriptions-container font-light">
-                <div className="sc-aXZVg font-extralight text-[14px] leading-[19px] tracking-[-0.3px] text-[rgba(2,6,12,0.6)] overflow-hidden w-full break-words">
-                  {cuisines.join(", ")}
+                <div className="sc-aXZVg font-light text-[14px] leading-[19px] text-[rgba(16,16,16,0.76)] overflow-hidden w-full break-words">
+                  {cuisines.length > 0 ? formatCuisines() : ""}
                 </div>
-                <div className="sc-aXZVg font-extralight text-[14px] leading-[19px] tracking-[-0.3px] text-[rgba(2,6,12,0.6)] overflow-hidden w-full break-words">
+                <div className="sc-aXZVg font-extralight text-[14px] leading-[19px] text-[rgba(16,16,16,0.76)] overflow-hidden w-full break-words">
                   {areaName}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
