@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
@@ -11,13 +11,19 @@ import User from "./components/User";
 import UserClass from "./components/UserClass";
 import RestroMenu from "./components/RestroPage";
 import Footer from "./components/Footer";
+import UserContext from "./utils/UserContext";
 
 const AppLayout = () => {
   return (
     <div className="App">
-      <Header />
-      <Outlet />
-      <Footer />
+      <UserContext.Provider value={{ loggedInUser: "SSG" }}>
+        <UserContext.Provider value={{ loggedInUser: "Elon" }}>
+          <Header />
+        </UserContext.Provider>
+
+        <Outlet />
+        {/* <Footer /> */}
+      </UserContext.Provider>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import RestroCard from "./RestroCard";
+import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
 
@@ -13,6 +13,8 @@ const Body = () => {
   const [curatedFoodType_Cards, setCuratedFoodType_Cards] = useState([]);
   const [topInCityRestro_Cards, setTopInCityRestro_Cards] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
+
+  const RestroCardPromoted = withPromotedLabel(RestroCard);
 
   // Function to toggle visibility
   const showComponent = () => {
@@ -305,9 +307,16 @@ const Body = () => {
             {listofRestaurants.length === 0 ? (
               <Shimmer />
             ) : (
-              filteredRestaurants.map((restaurant) => (
-                <RestroCard resData={restaurant} key={restaurant.info.id} />
-              ))
+              filteredRestaurants.map((restaurant) =>
+                restaurant.info.avgRating > 4.4 ? (
+                  <RestroCardPromoted
+                    resData={restaurant}
+                    key={restaurant.info.id}
+                  />
+                ) : (
+                  <RestroCard resData={restaurant} key={restaurant.info.id} />
+                )
+              )
             )}
           </div>
         </div>

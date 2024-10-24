@@ -1,13 +1,18 @@
 import React from "react";
 import AppLog from "/public/app_logo.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import UserContext from "../utils/UserContext.js";
 
 const Header = () => {
   const [btnName, setbtnName] = useState("Login");
 
   const onlineStatus = useOnlineStatus();
+
+  const contextData = useContext(UserContext);
+
+  console.log(contextData);
 
   return (
     <>
@@ -43,6 +48,7 @@ const Header = () => {
                 {btnName}
               </button>
             </li>
+            <li className="px-4 font-bold">{contextData.loggedInUser}</li>
           </ul>
         </div>
       </div>
