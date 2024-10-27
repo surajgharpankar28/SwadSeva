@@ -10,7 +10,7 @@ export const CON_URL = `${process.env.PARCEL_MEDIA_ASSETS_BASE_URL}image/upload/
 export const SWADSEVA_API_URL = `${process.env.PARCEL_SWADSEVA_APP_BASE_URL}restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING`;
 
 // Swiggy API to get Restaurant Menu data using swadseva server
-export const MENU_API = `${process.env.PARCEL_SWADSEVA_APP_BASE_URL}menu?page-type=REGULAR_MENU&complete-menu=true&lat=21.99740&lng=79.00110&restaurantId=`;
+export const MENU_API = `${process.env.PARCEL_SWADSEVA_APP_BASE_URL}menu?page-type=REGULAR_MENU&complete-menu=true&lat=21.1702401&lng=72.83106070000001&&submitAction=ENTER&restaurantId=`;
 
 // shimmer card unit
 export const shimmer_card_unit = 20;
