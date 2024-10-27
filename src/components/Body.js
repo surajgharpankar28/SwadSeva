@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
+import UserContext from "../utils/UserContext";
+import { SWADSEVA_API_URL } from "../utils/constants";
 
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
@@ -31,10 +33,8 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(
-        "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=16.7049873&lng=74.24325270000001&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      );
-
+      const data = await fetch(SWADSEVA_API_URL);
+      console.log(SWADSEVA_API_URL);
       // Check if the response is OK (status 200-299)
       if (!data.ok) {
         throw new Error(`HTTP error! Status: ${data.status}`);
@@ -143,6 +143,8 @@ const Body = () => {
     setSearchTerm("");
   };
 
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   return (
     <div className="body mx-auto max-w-[80%] ">
       <main>
@@ -209,6 +211,14 @@ const Body = () => {
               Clear
             </button>
           </div>
+        </div>
+        <div className="m-4 p-4 flex items-center">
+          <label>Username : </label>
+          <input
+            className="border border-black p-2 m-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
 
         <div className="curatedFoodtype-container flex flex-wrap justify-center">

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useContext } from "react";
+import React, { lazy, Suspense, useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
@@ -14,12 +14,18 @@ import Footer from "./components/Footer";
 import UserContext from "./utils/UserContext";
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  useEffect(() => {
+    const data = {
+      name: "Suraj Gharpankar",
+    };
+    setUserName(data.name);
+  });
   return (
     <div className="App">
-      <UserContext.Provider value={{ loggedInUser: "SSG" }}>
-        <UserContext.Provider value={{ loggedInUser: "Elon" }}>
-          <Header />
-        </UserContext.Provider>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <Header />
 
         <Outlet />
         {/* <Footer /> */}
