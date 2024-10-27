@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
-import RestroCard from "./RestroCard";
+import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
+import UserContext from "../utils/UserContext";
+import { SWADSEVA_API_URL } from "../utils/constants";
 
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [curatedFoodType, setCuratedFoodType] = useState([]);
   const [topInCity, setTopInCity] = useState([]);
-
   const [cityRestro, setCityRestro] = useState([]);
-
   const [curatedFoodType_Cards, setCuratedFoodType_Cards] = useState([]);
-
   const [topInCityRestro_Cards, setTopInCityRestro_Cards] = useState([]);
-
   const [isVisible, setIsVisible] = useState(true);
+
+  const RestroCardPromoted = withPromotedLabel(RestroCard);
 
   // Function to toggle visibility
   const showComponent = () => {
@@ -32,89 +32,99 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      // "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=16.7049873&lng=74.24325270000001&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-
-    const cards = json.data.cards;
-
-    // Variables to hold the found data
-    let curatedFoodType = null;
-    let topInCity = null;
-    let cityRestro = null;
-    let curatedFoodType_Cards = null;
-    let topInCityRestro_Cards = null;
-    let listOfRestaurants = null;
-    let filteredRestaurants = null;
-
-    // Iterate through cards array to find restaurants, curatedFoodType, topInCity, and cityRestro
-    for (let i = 0; i < cards.length; i++) {
-      const card = cards[i]?.card?.card;
-
-      // Set listOfRestaurants and filteredRestaurants
-      if (!listOfRestaurants && card?.id == "restaurant_grid_listing") {
-        listOfRestaurants = card.gridElements.infoWithStyle.restaurants;
-        filteredRestaurants = card.gridElements.infoWithStyle.restaurants;
+    try {
+      const data = await fetch(SWADSEVA_API_URL);
+      console.log(SWADSEVA_API_URL);
+      // Check if the response is OK (status 200-299)
+      if (!data.ok) {
+        throw new Error(`HTTP error! Status: ${data.status}`);
       }
 
-      // Set curatedFoodType from the first valid card (with gridElements)
-      if (!curatedFoodType && card?.id == "whats_on_your_mind") {
-        curatedFoodType = card;
-        curatedFoodType_Cards = card.gridElements.infoWithStyle.info;
+      const json = await data.json();
+      const cards = json.data.cards;
+
+      // Continue processing the cards data here
+      console.log(cards);
+
+      // Variables to hold the found data
+      let curatedFoodType = null;
+      let topInCity = null;
+      let cityRestro = null;
+      let curatedFoodType_Cards = null;
+      let topInCityRestro_Cards = null;
+      let listOfRestaurants = null;
+      let filteredRestaurants = null;
+
+      // Iterate through cards array to find restaurants, curatedFoodType, topInCity, and cityRestro
+      for (let i = 0; i < cards.length; i++) {
+        const card = cards[i]?.card?.card;
+
+        // Set listOfRestaurants and filteredRestaurants
+        if (!listOfRestaurants && card?.id == "restaurant_grid_listing") {
+          listOfRestaurants = card.gridElements.infoWithStyle.restaurants;
+          filteredRestaurants = card.gridElements.infoWithStyle.restaurants;
+        }
+
+        // Set curatedFoodType from the first valid card (with gridElements)
+        if (!curatedFoodType && card?.id == "whats_on_your_mind") {
+          curatedFoodType = card;
+          curatedFoodType_Cards = card.gridElements.infoWithStyle.info;
+        }
+
+        // Set topInCity and topInCityRestro_Cards
+        if (!topInCity && card?.id == "top_brands_for_you") {
+          topInCity = card;
+          topInCityRestro_Cards = card.gridElements?.infoWithStyle?.restaurants;
+        }
+
+        // Set cityRestro
+        // if (!cityRestro) {
+        //   cityRestro = card;
+        // }
+
+        if (!cityRestro && card.id == "popular_restaurants_title") {
+          cityRestro = card.title;
+        }
+
+        // If all needed data is found, break the loop
+        if (listOfRestaurants && curatedFoodType && topInCity && cityRestro) {
+          break;
+        }
       }
 
-      // Set topInCity and topInCityRestro_Cards
-      if (!topInCity && card?.id == "top_brands_for_you") {
-        topInCity = card;
-        topInCityRestro_Cards = card.gridElements?.infoWithStyle?.restaurants;
+      // Set state for listOfRestaurants and filteredRestaurants
+      if (listOfRestaurants) {
+        setListofRestaurants(listOfRestaurants);
+        setFilteredRestaurants(filteredRestaurants);
       }
 
-      // Set cityRestro
-      // if (!cityRestro) {
-      //   cityRestro = card;
-      // }
-
-      if (!cityRestro && card.id == "popular_restaurants_title") {
-        cityRestro = card.title;
+      // Set state for curatedFoodType and its cards
+      if (curatedFoodType) {
+        setCuratedFoodType(curatedFoodType);
+        setCuratedFoodType_Cards(curatedFoodType_Cards);
       }
 
-      // If all needed data is found, break the loop
-      if (listOfRestaurants && curatedFoodType && topInCity && cityRestro) {
-        break;
+      // Set state for topInCity and its restaurants
+      if (topInCity) {
+        setTopInCity(topInCity);
+        setTopInCityRestro_Cards(topInCityRestro_Cards);
       }
-    }
 
-    // Set state for listOfRestaurants and filteredRestaurants
-    if (listOfRestaurants) {
-      setListofRestaurants(listOfRestaurants);
-      setFilteredRestaurants(filteredRestaurants);
-    }
+      // Set state for cityRestro
+      if (cityRestro) {
+        setCityRestro(cityRestro);
+      }
 
-    // Set state for curatedFoodType and its cards
-    if (curatedFoodType) {
-      setCuratedFoodType(curatedFoodType);
-      setCuratedFoodType_Cards(curatedFoodType_Cards);
+      // Log the data for debugging
+      console.log("Curated Food Type:", curatedFoodType);
+      console.log("Top in City:", topInCity);
+      console.log("Top in City - Cards:", topInCityRestro_Cards);
+      console.log("List of Restaurants:", listOfRestaurants);
+      console.log("City Restro:", cityRestro);
+    } catch (error) {
+      // Log or display the error
+      console.error("Error fetching or processing data:", error.message);
     }
-
-    // Set state for topInCity and its restaurants
-    if (topInCity) {
-      setTopInCity(topInCity);
-      setTopInCityRestro_Cards(topInCityRestro_Cards);
-    }
-
-    // Set state for cityRestro
-    if (cityRestro) {
-      setCityRestro(cityRestro);
-    }
-
-    // Log the data for debugging
-    console.log("Curated Food Type:", curatedFoodType);
-    console.log("Top in City:", topInCity);
-    console.log("Top in City - Cards:", topInCityRestro_Cards);
-    console.log("List of Restaurants:", listOfRestaurants);
-    console.log("City Restro:", cityRestro);
   };
 
   //search-bar
@@ -132,6 +142,8 @@ const Body = () => {
   const clearSearchInput = () => {
     setSearchTerm("");
   };
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   return (
     <div className="body mx-auto max-w-[80%] ">
@@ -200,10 +212,18 @@ const Body = () => {
             </button>
           </div>
         </div>
+        <div className="m-4 p-4 flex items-center">
+          <label>Username : </label>
+          <input
+            className="border border-black p-2 m-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
 
         <div className="curatedFoodtype-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 ? (
-            <div>No Curated</div>
+            <Shimmer />
           ) : (
             isVisible && (
               <>
@@ -243,7 +263,7 @@ const Body = () => {
 
         <div className="TopInCity-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 ? (
-            <div>No Top in City</div>
+            <Shimmer />
           ) : (
             isVisible && (
               <>
@@ -297,9 +317,16 @@ const Body = () => {
             {listofRestaurants.length === 0 ? (
               <Shimmer />
             ) : (
-              filteredRestaurants.map((restaurant) => (
-                <RestroCard resData={restaurant} key={restaurant.info.id} />
-              ))
+              filteredRestaurants.map((restaurant) =>
+                restaurant.info.avgRating > 4.4 ? (
+                  <RestroCardPromoted
+                    resData={restaurant}
+                    key={restaurant.info.id}
+                  />
+                ) : (
+                  <RestroCard resData={restaurant} key={restaurant.info.id} />
+                )
+              )
             )}
           </div>
         </div>
