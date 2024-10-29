@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { CON_URL } from "../utils/constants";
 import isVeg from "../../public/veg-icon.svg";
 import isNonVeg from "../../public/non-veg-icon.svg";
+import logo from "../../public/app_logo.png";
 const RestroMenuItems = ({ menuItem }) => {
   // console.log(menuItem);
+  const [imageFailed, setImageFailed] = useState(false); // Initialize state to manage image failure
+  const imgfilter = {
+    filter: "grayscale(50%)",
+  };
 
   return (
     <div>
       {menuItem.map((item) => (
         <>
+          {console.log(CON_URL + item.card.info.imageId + "hey ")}
           <div
             key={item.card.info.id}
             className="p-2 m-2 text-left flex justify-between"
@@ -37,12 +43,20 @@ const RestroMenuItems = ({ menuItem }) => {
             </div>
             <div className="3/12 flex align-bottom">
               <div className="">
-                <button className="p-2 font-bold text-green-500 bg-white shadow-lg rounded-lg absolute m-auto">
+                <button className="p-2 z-10 font-bold text-green-500 bg-white shadow-lg rounded-lg absolute m-auto">
                   ADD
                 </button>
                 <img
-                  className="w-[130px] mr-5 rounded-lg"
+                  className={`w-[130px] mr-5 rounded-lg ${
+                    imageFailed ? `${imgfilter} grayscale` : ""
+                  }`}
                   src={CON_URL + item.card.info.imageId}
+                  onError={(e) => {
+                    // console.log("Image failed to load, using fallback logo.");
+                    e.currentTarget.src = logo; // Set to your logo URL
+                    setImageFailed(true); // Correctly update the state using setImageFailed
+                  }}
+                  alt={item.card.info.name}
                 />
               </div>
             </div>
