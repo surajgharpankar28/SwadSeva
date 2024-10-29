@@ -16,7 +16,6 @@ const Header = () => {
 
   return (
     <>
-      <p>This is Development site</p>
       <div className="flex justify-between bg-gray-300 sm:bg-yellow-200">
         <div className="logo-container">
           <img className="w-24 ml-10 shadow-xl" src={AppLog} />
