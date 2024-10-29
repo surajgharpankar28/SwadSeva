@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
-import Shimmer from "./Shimmer";
+import Shimmer, { MenuShimmer } from "./Shimmer";
 import RestroCategory from "./RestroCategory";
 
 const RestroMenu = () => {
@@ -10,7 +10,7 @@ const RestroMenu = () => {
 
   const [showIndex, setShowIndex] = useState(0);
 
-  if (!resInfo) return <Shimmer />;
+  if (!resInfo) return <MenuShimmer />;
 
   // Destructure only if the restaurant ID matches
   const restaurantInfo = resInfo?.cards[2]?.card?.card?.info;

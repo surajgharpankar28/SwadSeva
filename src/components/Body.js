@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import RestroCard, { withPromotedLabel } from "./RestroCard";
-import Shimmer from "./Shimmer";
+import Shimmer, { CuratedFoodTypeShimmer } from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
 import UserContext from "../utils/UserContext";
 import { SWADSEVA_API_URL } from "../utils/constants";
@@ -223,7 +223,7 @@ const Body = () => {
 
         <div className="curatedFoodtype-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 ? (
-            <Shimmer />
+            <CuratedFoodTypeShimmer />
           ) : (
             isVisible && (
               <>
