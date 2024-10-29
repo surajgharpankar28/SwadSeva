@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect, useContext } from "react";
 import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer, { CuratedFoodTypeShimmer } from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
@@ -144,7 +144,7 @@ const Body = () => {
   };
 
   const { loggedInUser, setUserName } = useContext(UserContext);
-
+  console.log(loggedInUser);
   return (
     <div className="body mx-auto max-w-[80%] ">
       <main>

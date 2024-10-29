@@ -18,10 +18,10 @@ const AppLayout = () => {
 
   useEffect(() => {
     const data = {
-      name: "Suraj Gharpankar",
+      name: "Suraj SG",
     };
     setUserName(data.name);
-  });
+  }, []);
   return (
     <div className="App">
       <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
