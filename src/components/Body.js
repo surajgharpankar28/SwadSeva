@@ -212,14 +212,14 @@ const Body = () => {
             </button>
           </div>
         </div>
-        <div className="m-4 p-4 flex items-center">
+        {/* <div className="m-4 p-4 flex items-center">
           <label>Username : </label>
           <input
             className="border border-black p-2 m-2"
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
           />
-        </div>
+        </div> */}
 
         <div className="curatedFoodtype-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 ? (

@@ -14,7 +14,6 @@ const RestroMenuItems = ({ menuItem }) => {
     <div>
       {menuItem.map((item) => (
         <>
-          {console.log(CON_URL + item.card.info.imageId + "hey ")}
           <div
             key={item.card.info.id}
             className="p-2 m-2 text-left flex justify-between"

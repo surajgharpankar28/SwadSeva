@@ -14,6 +14,9 @@ const RestroCard = ({ resData }) => {
     aggregatedDiscountInfoV3,
   } = resData?.info || {};
 
+  const RestroImageForMenuItems = CON_URL + cloudinaryImageId;
+
+  console.log(RestroImageForMenuItems);
   // Utility function to render discount info
   const renderDiscountInfo = () => {
     const { header, subHeader } = aggregatedDiscountInfoV3 || {};
