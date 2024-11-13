@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
 import UserContext from "../utils/UserContext.js";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setbtnName] = useState("Login");
@@ -12,7 +13,12 @@ const Header = () => {
 
   const contextData = useContext(UserContext);
 
-  console.log(contextData);
+  //  console.log(contextData);
+
+  //selector - Redux Toolkit, it is a hook
+  //subscribing to store using useSelector
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <>
@@ -33,7 +39,9 @@ const Header = () => {
             <li className="px-4">
               <Link to="/contact">Contact us</Link>
             </li>
-            <li className="px-4">Cart</li>
+            <li className="px-4 font-bold">
+              <Link to="/cart">Cart ({cartItems.length} item) </Link>
+            </li>
             <li className="px-4">
               <button
                 className="login-btn"

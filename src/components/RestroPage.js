@@ -50,7 +50,7 @@ const RestroMenu = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     ) || [];
 
-  console.log(categories);
+  // console.log(categories);
 
   return (
     <div className="text-center">
@@ -59,15 +59,19 @@ const RestroMenu = () => {
         {cuisines.join(", ")} - {costForTwoMessage}
       </p>
 
-      {categories.map((category, index) => (
-        <RestroCategory
-          categoryData={category?.card?.card}
-          key={category?.card?.card.name}
-          showItems={index === showIndex && true}
-          setShowIndex={() => setShowIndex(index)}
-          setShowItems={() => setShowIndex(false)}
-        />
-      ))}
+      {categories.length > 0 ? (
+        categories.map((category, index) => (
+          <RestroCategory
+            categoryData={category?.card?.card}
+            key={category?.card?.card.name}
+            showItems={index === showIndex && true}
+            setShowIndex={() => setShowIndex(index)}
+            setShowItems={() => setShowIndex(false)}
+          />
+        ))
+      ) : (
+        <div className="h-[100%] "> No data</div>
+      )}
     </div>
   );
 };

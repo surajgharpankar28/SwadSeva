@@ -3,11 +3,21 @@ import { CON_URL } from "../utils/constants";
 import isVeg from "../../public/veg-icon.svg";
 import isNonVeg from "../../public/non-veg-icon.svg";
 import logo from "../../public/app_logo.png";
+import { useDispatch } from "react-redux";
+import { addItems } from "../utils/slices/cartSlice";
+
 const RestroMenuItems = ({ menuItem }) => {
   // console.log(menuItem);
   const [imageFailed, setImageFailed] = useState(false); // Initialize state to manage image failure
   const imgfilter = {
     filter: "grayscale(50%)",
+  };
+
+  //used for cartItem - Add button
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    //Dispatch an Action
+    dispatch(addItems(item));
   };
 
   return (
@@ -42,7 +52,10 @@ const RestroMenuItems = ({ menuItem }) => {
             </div>
             <div className="3/12 flex align-bottom">
               <div className="">
-                <button className="p-2 z-10 font-bold text-green-500 bg-white shadow-lg rounded-lg absolute m-auto">
+                <button
+                  className="p-2 z-10 font-bold text-green-500 bg-white shadow-lg rounded-lg absolute m-auto"
+                  onClick={() => handleAddItem(item)}
+                >
                   ADD
                 </button>
                 <img
@@ -66,6 +79,19 @@ const RestroMenuItems = ({ menuItem }) => {
       ))}
     </div>
   );
+};
+
+export const RestroMenuItemsInCart = (RestroMenuItems) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute bg-black text-white z-10 m-1 p-1 rounded-md">
+          Promoted
+        </label>
+        <RestroMenuItems {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestroMenuItems;

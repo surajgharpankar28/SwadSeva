@@ -314,20 +314,18 @@ const Body = () => {
             </div>
           </div>
           <div className="flex flex-wrap justify-center">
-            {listofRestaurants.length === 0 ? (
-              <Shimmer />
-            ) : (
-              filteredRestaurants.map((restaurant) =>
-                restaurant.info.avgRating > 4.4 ? (
-                  <RestroCardPromoted
-                    resData={restaurant}
-                    key={restaurant.info.id}
-                  />
-                ) : (
-                  <RestroCard resData={restaurant} key={restaurant.info.id} />
-                )
-              )
-            )}
+            {listofRestaurants.length === 0
+              ? ""
+              : filteredRestaurants.map((restaurant) =>
+                  restaurant.info.avgRating > 4.4 ? (
+                    <RestroCardPromoted
+                      resData={restaurant}
+                      key={restaurant.info.id}
+                    />
+                  ) : (
+                    <RestroCard resData={restaurant} key={restaurant.info.id} />
+                  )
+                )}
           </div>
         </div>
       </main>

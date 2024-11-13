@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
@@ -31,7 +32,7 @@ const AppLayout = () => {
           <Header />
 
           <Outlet />
-          {/* <Footer /> */}
+          <Footer />
         </UserContext.Provider>
       </Provider>
     </div>
@@ -58,6 +59,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/restaurants/:resId",

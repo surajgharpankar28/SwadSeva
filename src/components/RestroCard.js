@@ -33,7 +33,7 @@ const RestroCard = ({ resData }) => {
 
   return (
     <div className="pr-8 pl-4 pb-6">
-      <Link target="_blank" to={`/restaurants/${id}`}>
+      <Link to={`/restaurants/${id}`}>
         <div className="sc-etVdmn aNris w-[15rem] h-auto">
           <div className="sc-eNSrOW hqryrO grid transition duration-50 gap-3 grid-flow-row justify-stretch items-center p-0 cursor-pointer">
             <div className="sc-cWSHoV jdRrlh relative">
