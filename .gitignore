@@ -5,3 +5,4 @@ dist
 coverage
 src/__tests__/sum.text.js
 src/components/sum.js
+.vscode/settings.json
