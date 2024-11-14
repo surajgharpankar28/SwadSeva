@@ -90,9 +90,13 @@ const Header = () => {
               <CIcon className="text-gray-800 w-[1.5rem] mr-2" icon={cilCart} />
               <Link to="/cart" className="align-middle">
                 Cart{" "}
-                <span className="border border-gray-500 rounded-full px-2 ml-1">
-                  {cartItems.length}
-                </span>
+                {cartItems.length > 0 ? (
+                  <span className="border border-gray-500 rounded-full px-2 ml-1">
+                    {cartItems.length}
+                  </span>
+                ) : (
+                  ""
+                )}
               </Link>
             </li>
             <li className="flex items-center px-4 text-center hover:text-orange-500">

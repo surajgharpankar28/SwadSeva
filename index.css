@@ -171,3 +171,93 @@
   }
 }
 /*Animation to Shimmer Component Card and Menu card End*/
+
+/* Restrautrant details */
+.restaurant-details-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.restaurant-name {
+  font-size: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.rating-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+}
+
+.rating-info {
+  display: flex;
+  align-items: center;
+}
+
+.rating-text {
+  font-size: 1rem;
+  color: #333;
+  margin-right: 5px;
+}
+
+.dot {
+  font-size: 1.2rem;
+  color: #888;
+  margin-right: 5px;
+}
+
+.price {
+  font-size: 1rem;
+  color: #21973b;
+}
+
+.cuisine-section {
+  margin-bottom: 20px;
+}
+
+.cuisine-link {
+  text-decoration: none;
+}
+
+.cuisine-item {
+  font-size: 1.1rem;
+  color: #333;
+  text-align: center;
+}
+
+.outlet-info-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.outlet-location,
+.delivery-time {
+  font-size: 1rem;
+}
+
+.label {
+  font-weight: bold;
+  color: #555;
+}
+
+.outlet-name,
+.time {
+  color: #333;
+}

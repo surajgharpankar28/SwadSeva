@@ -9,11 +9,12 @@ const RestroCard = ({ resData }) => {
     cuisines = [],
     avgRating,
     cloudinaryImageId,
-    deliveryTime,
+
     areaName,
     aggregatedDiscountInfoV3,
   } = resData?.info || {};
 
+  const { deliveryTime } = resData?.info.sla || {};
   const RestroImageForMenuItems = CON_URL + cloudinaryImageId;
 
   console.log(RestroImageForMenuItems);
@@ -31,6 +32,7 @@ const RestroCard = ({ resData }) => {
       : cuisineString;
   };
 
+  console.log();
   return (
     <div className="pr-8 pl-4 pb-6">
       <Link to={`/restaurants/${id}`}>
