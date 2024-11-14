@@ -316,7 +316,64 @@ const Body = () => {
                     </div>
                   </div>
                   <div className="relative w-full">
-                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
+                    {/* Left Scroll Arrow */}
+                    <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
+                      <button
+                        onClick={() => {
+                          document.querySelector(
+                            ".scroll-container"
+                          ).scrollLeft -= 200;
+                        }}
+                        className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M15 19l-7-7 7-7"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Right Scroll Arrow */}
+                    <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
+                      <button
+                        onClick={() => {
+                          document.querySelector(
+                            ".scroll-container"
+                          ).scrollLeft += 200;
+                        }}
+                        className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M9 5l7 7-7 7"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Scrollable Container */}
+                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory scroll-container">
                       <div className="row flex">
                         {topInCityRestro_Cards.map((topInCity) => (
                           <div key={topInCity.id}>
@@ -328,8 +385,6 @@ const Body = () => {
                         ))}
                       </div>
                     </div>
-
-                    {}
                   </div>
                 </div>
               </>
