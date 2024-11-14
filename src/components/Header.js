@@ -30,11 +30,13 @@ const Header = () => {
     <div className="sm:bg-white border-b-2 border-gray-300 shadow-lg">
       <div className="w-10/12 flex justify-between m-auto">
         <div className="logo-container mt-2 mb-2 ">
-          <img
-            className="w-14 rounded-[2rem]  ml-10 shadow-xl"
-            src={AppLog}
-            alt="App Logo"
-          />
+          <Link to="/" className="align-middle">
+            <img
+              className="w-14 rounded-[2rem]  ml-10 shadow-xl"
+              src={AppLog}
+              alt="App Logo"
+            />
+          </Link>
         </div>
         <div className="text-left m-auto ml-4 flex">
           <CIcon
