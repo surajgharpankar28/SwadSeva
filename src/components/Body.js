@@ -293,7 +293,11 @@ const Body = () => {
         </div>
 
         {isVisible ? (
-          <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-2" />
+          <div className="relative my-4">
+            <div className="absolute inset-0 top-1/2 mx-[calc(10%+52px)]">
+              <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent shadow-xl"></div>
+            </div>
+          </div>
         ) : null}
 
         <div className="TopInCity-container flex flex-wrap justify-center">
@@ -334,7 +338,11 @@ const Body = () => {
         </div>
 
         {isVisible ? (
-          <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-2" />
+          <div className="relative my-4">
+            <div className="absolute inset-0 top-1/2 mx-[calc(10%+52px)]">
+              <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent shadow-xl"></div>
+            </div>
+          </div>
         ) : null}
 
         <div className="restaurant-container">
