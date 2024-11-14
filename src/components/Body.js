@@ -5,7 +5,8 @@ import Shimmer, { CuratedFoodTypeShimmer } from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
 import UserContext from "../utils/UserContext";
 import { SWADSEVA_API_URL } from "../utils/constants";
-
+import { CIcon } from "@coreui/icons-react";
+import { cilSearch } from "@coreui/icons";
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -149,21 +150,26 @@ const Body = () => {
     <div className="body mx-auto max-w-[80%] ">
       <main>
         <div className="filter flex items-center">
-          <div className="search px-4">
+          {/* Search Bar */}
+
+          <div className="search px-4 mt-4 text-center m-auto">
             <div>
-              <form onSubmit={handleSubmit}>
+              <form
+                onSubmit={handleSubmit}
+                className="flex items-center justify-center"
+              >
                 <input
-                  className="pl-1 border borer-solid border-black rounded-lg"
+                  className="pl-3 py-2 border border-solid border-black focus:border-orange-500 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
                   type="text"
-                  placeholder="search restaurant"
+                  placeholder="Search restaurant"
                   value={searchTerm}
                   onChange={handleSearch}
                 />
                 <button
-                  className="px-4 py-1 bg-green-200 m-4 rounded-lg"
+                  className="px-2 py-2 bg-orange-500 text-white rounded-r-lg hover:bg-orange-400 focus:outline-none"
                   type="submit"
                   onClick={() => {
-                    //filter logic
+                    // Filter logic
                     const filteredList = listofRestaurants.filter((res) =>
                       res?.info?.name
                         .toLowerCase()
@@ -177,49 +183,15 @@ const Body = () => {
                     }
                   }}
                 >
-                  Search
+                  <CIcon
+                    className="text-white w-[1.5rem] mr-2"
+                    icon={cilSearch}
+                  />
                 </button>
               </form>
             </div>
           </div>
-          <div className="items-center m-4 px-4">
-            <button
-              className="px-4 py-2 bg-gray-200 rounded-lg"
-              onClick={() => {
-                console.log("Button Clicked");
-                //filter logic
-                const filteredList = listofRestaurants.filter(
-                  (res) => res.info.avgRating > 4.3
-                );
-                hideComponent();
-                setFilteredRestaurants(filteredList);
-                console.log(filteredList);
-              }}
-            >
-              Top Rated Restaurant
-            </button>
-            <button
-              className="top-rated-btn px-4 underline"
-              onClick={() => {
-                console.log("Button Clicked");
-                //filter logic
-                setFilteredRestaurants(listofRestaurants);
-                showComponent();
-                clearSearchInput();
-              }}
-            >
-              Clear
-            </button>
-          </div>
         </div>
-        {/* <div className="m-4 p-4 flex items-center">
-          <label>Username : </label>
-          <input
-            className="border border-black p-2 m-2"
-            value={loggedInUser}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div> */}
 
         <div className="curatedFoodtype-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 ? (
