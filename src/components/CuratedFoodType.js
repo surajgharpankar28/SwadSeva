@@ -6,7 +6,7 @@ const CuratedFoodType = (props) => {
   //   console.log("Curated Card" + curatedData.imageGridCards?.info[0]?.id);
   return (
     <>
-      <div>
+      <div className="hover:scale-105 transition-all duration-300 ease-in-out transform">
         <a aria-label="description of food type">
           <div style={{ height: "180px", width: "144px" }}>
             <img

@@ -34,7 +34,7 @@ const RestroCard = ({ resData }) => {
   return (
     <div className="pr-8 pl-4 pb-6">
       <Link to={`/restaurants/${id}`}>
-        <div className="w-[15rem] h-[20rem] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+        <div className="w-[15rem] h-[20rem] rounded-lg overflow-hidden shadow-lg hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out transform">
           <div className="relative w-full h-40">
             <img
               className="w-full h-full object-cover rounded-t-lg"
