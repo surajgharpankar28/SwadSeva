@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect, useContext } from "react";
 import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer, { CuratedFoodTypeShimmer } from "./Shimmer";
@@ -7,6 +7,7 @@ import UserContext from "../utils/UserContext";
 import { SWADSEVA_API_URL } from "../utils/constants";
 import { CIcon } from "@coreui/icons-react";
 import { cilSearch } from "@coreui/icons";
+
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -146,6 +147,22 @@ const Body = () => {
 
   const { loggedInUser, setUserName } = useContext(UserContext);
   console.log(loggedInUser);
+
+  const scrollContainerRef = useRef(null); // Reference to the scrollable container
+
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const scrollAmount = 300; // Adjust scroll amount as needed
+
+      if (direction === "left") {
+        container.scrollLeft -= scrollAmount;
+      } else if (direction === "right") {
+        container.scrollLeft += scrollAmount;
+      }
+    }
+  };
+
   return (
     <div className="body mx-auto max-w-[80%] ">
       <main>
@@ -209,8 +226,12 @@ const Body = () => {
                     </div>
                   </div>
 
-                  <div className="relative w-full ">
-                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
+                  <div className="relative w-full">
+                    {/* Scrollable container */}
+                    <div
+                      className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory relative"
+                      ref={scrollContainerRef} // Set the reference to the scroll container
+                    >
                       <div className="row flex">
                         {curatedFoodType_Cards.map((curated) => (
                           <div key={curated.id}>
@@ -221,6 +242,48 @@ const Body = () => {
                           </div>
                         ))}
                       </div>
+                    </div>
+
+                    {/* Left Arrow */}
+                    <div
+                      className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
+                      onClick={() => scroll("left")} // Scroll left when clicked
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </div>
+
+                    {/* Right Arrow */}
+                    <div
+                      className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
+                      onClick={() => scroll("right")} // Scroll right when clicked
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -240,7 +303,7 @@ const Body = () => {
             isVisible && (
               <>
                 <div className="p-4 overflow-hidden">
-                  <div className="titleDiv">
+                  <div className="titleDiv py-4">
                     <div>
                       <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
                         {topInCity.header?.title}
@@ -276,7 +339,7 @@ const Body = () => {
 
         <div className="restaurant-container">
           <div className="p-4 overflow-hidden">
-            <div className="titleDiv">
+            <div className="titleDiv py-4">
               <div>
                 <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
                   {cityRestro}
