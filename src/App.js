@@ -26,16 +26,17 @@ const AppLayout = () => {
     setUserName(data.name);
   }, []);
   return (
-    <div className="App">
-      <Provider store={appStore}>
-        <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="min-h-screen flex flex-col">
           <Header />
-
-          <Outlet />
+          <main className="flex-grow">
+            <Outlet />
+          </main>
           <Footer />
-        </UserContext.Provider>
-      </Provider>
-    </div>
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
