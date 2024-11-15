@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import useRestaurantMenu from "../utils/useRestaurantMenu";
-import Shimmer, { MenuShimmer } from "./Shimmer";
+import { MenuShimmer } from "./Shimmer";
 import RestroCategory from "./RestroCategory";
 import { CON_URL } from "../utils/constants";
 import { CIcon } from "@coreui/icons-react";
@@ -13,6 +14,11 @@ import {
   cilFastfood,
 } from "@coreui/icons";
 const RestroMenu = () => {
+  useEffect(() => {
+    // Scroll to top on component mount
+    window.scrollTo(0, 0);
+  }, []);
+
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
 

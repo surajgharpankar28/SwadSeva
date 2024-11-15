@@ -1,12 +1,11 @@
 import React, { useRef } from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import RestroCard, { withPromotedLabel } from "./RestroCard";
 import Shimmer, { CuratedFoodTypeShimmer } from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
-import UserContext from "../utils/UserContext";
 import { SWADSEVA_API_URL } from "../utils/constants";
 import { CIcon } from "@coreui/icons-react";
-import { cilSearch } from "@coreui/icons";
+import { cilSearch, cilXCircle } from "@coreui/icons";
 
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
@@ -17,6 +16,7 @@ const Body = () => {
   const [curatedFoodType_Cards, setCuratedFoodType_Cards] = useState([]);
   const [topInCityRestro_Cards, setTopInCityRestro_Cards] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const RestroCardPromoted = withPromotedLabel(RestroCard);
 
@@ -30,8 +30,10 @@ const Body = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (searchTerm === "") {
+      fetchData(); // Fetch all data when searchTerm is empty
+    }
+  }, [searchTerm]);
 
   const fetchData = async () => {
     try {
@@ -130,10 +132,17 @@ const Body = () => {
   };
 
   //search-bar
-  const [searchTerm, setSearchTerm] = useState("");
   // console.log("Search Rendered");
   const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
+    const value = event.target.value;
+    setSearchTerm(value);
+
+    if (value !== "") {
+      const filteredList = listofRestaurants.filter((res) =>
+        res?.info?.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredRestaurants(filteredList);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -145,11 +154,7 @@ const Body = () => {
     setSearchTerm("");
   };
 
-  const { loggedInUser, setUserName } = useContext(UserContext);
-  // console.log(loggedInUser);
-
   const scrollContainerRef = useRef(null); // Reference to the scrollable container
-
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
@@ -176,45 +181,40 @@ const Body = () => {
                 className="flex items-center justify-center"
               >
                 <input
-                  className="pl-3 py-2 border border-solid border-black focus:border-orange-500 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
+                  className="h-auto w-[25rem] pl-3 py-2 border border-solid border-black focus:border-orange-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
                   type="text"
                   placeholder="Search restaurant"
                   value={searchTerm}
                   onChange={handleSearch}
                 />
-                <button
-                  className="px-2 py-2 bg-orange-500 text-white rounded-r-lg hover:bg-orange-400 focus:outline-none"
-                  type="submit"
-                  onClick={() => {
-                    // Filter logic
-                    const filteredList = listofRestaurants.filter((res) =>
-                      res?.info?.name
-                        .toLowerCase()
-                        .includes(searchTerm.toLowerCase())
-                    );
-                    // console.log("Button Clicked");
-                    setFilteredRestaurants(filteredList);
-                    // console.log(filteredList);
-                    if (searchTerm) {
-                      hideComponent();
-                    }
-                  }}
-                >
-                  <CIcon
-                    className="text-white w-[1.5rem] mr-2"
-                    icon={cilSearch}
-                  />
-                </button>
+                {searchTerm.length != 0 ? (
+                  <button
+                    className={`px-2 py-2 text-orange-500 rounded-r-l focus:outline-none ${
+                      !searchTerm
+                        ? "bg-gray-400 hover:bg-gray-400 cursor-not-allowed"
+                        : ""
+                    }`}
+                    type="submit"
+                    onClick={clearSearchInput}
+                    disabled={!searchTerm} // Disables the button if searchTerm is empty
+                  >
+                    <CIcon
+                      className="text-black hover:text-orange-500 w-[1.5rem] mr-2"
+                      icon={cilXCircle}
+                    />
+                  </button>
+                ) : null}
               </form>
             </div>
           </div>
         </div>
 
         <div className="curatedFoodtype-container flex flex-wrap justify-center">
-          {curatedFoodType.length === 0 ? (
+          {curatedFoodType.length === 0 && searchTerm.length === 0 ? (
             <CuratedFoodTypeShimmer />
           ) : (
-            isVisible && (
+            isVisible &&
+            searchTerm.length === 0 && (
               <>
                 <div className="p-4 overflow-hidden">
                   <div className="titleDiv">
@@ -257,9 +257,9 @@ const Body = () => {
                         stroke="currentColor"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M15 19l-7-7 7-7"
                         />
                       </svg>
@@ -278,9 +278,9 @@ const Body = () => {
                         stroke="currentColor"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M9 5l7 7-7 7"
                         />
                       </svg>
@@ -292,7 +292,7 @@ const Body = () => {
           )}
         </div>
 
-        {isVisible ? (
+        {isVisible && searchTerm.length === 0 ? (
           <div className="relative my-4">
             <div className="absolute inset-0 top-1/2 mx-[calc(10%+52px)]">
               <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent shadow-xl"></div>
@@ -301,10 +301,11 @@ const Body = () => {
         ) : null}
 
         <div className="TopInCity-container flex flex-wrap justify-center">
-          {curatedFoodType.length === 0 ? (
+          {curatedFoodType.length === 0 && searchTerm.length === 0 ? (
             <Shimmer />
           ) : (
-            isVisible && (
+            isVisible &&
+            searchTerm.length === 0 && (
               <>
                 <div className="p-4 overflow-hidden">
                   <div className="titleDiv py-4">
@@ -375,14 +376,15 @@ const Body = () => {
                     {/* Scrollable Container */}
                     <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory scroll-container">
                       <div className="row flex">
-                        {topInCityRestro_Cards.map((topInCity) => (
-                          <div key={topInCity.id}>
-                            <RestroCard
-                              resData={topInCity}
-                              key={topInCity.imageGridCards?.info[0]?.id}
-                            />
-                          </div>
-                        ))}
+                        {searchTerm.length === 0 &&
+                          topInCityRestro_Cards.map((topInCity) => (
+                            <div key={topInCity.id}>
+                              <RestroCard
+                                resData={topInCity}
+                                key={topInCity.imageGridCards?.info[0]?.id}
+                              />
+                            </div>
+                          ))}
                       </div>
                     </div>
                   </div>
@@ -392,7 +394,7 @@ const Body = () => {
           )}
         </div>
 
-        {isVisible ? (
+        {isVisible && searchTerm.length === 0 ? (
           <div className="relative my-4">
             <div className="absolute inset-0 top-1/2 mx-[calc(10%+52px)]">
               <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent shadow-xl"></div>
