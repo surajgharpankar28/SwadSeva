@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AppLog from "/public/app_logo.png";
+import Swadseva from "/public/swadseva.jpg";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
 import UserContext from "../utils/UserContext.js";
 import { CIcon } from "@coreui/icons-react";
@@ -29,15 +30,22 @@ const Header = () => {
   return (
     <div className="sm:bg-white border-b-2 border-gray-300 shadow-lg">
       <div className="w-10/12 flex justify-between m-auto">
-        <div className="logo-container mt-2 mb-2 ">
-          <Link to="/" className="align-middle">
+        <div className="logo-container mt-2 mb-2">
+          <Link to="/" className="flex items-center">
             <img
-              className="w-14 rounded-[2rem]  ml-10 shadow-xl"
+              className="w-14 rounded-[2rem] ml-10 shadow-xl"
               src={AppLog}
               alt="App Logo"
             />
+            <h1
+              style={{ fontFamily: "'Kaushan Script', cursive" }}
+              className="text-4xl text-orange-500 ml-2"
+            >
+              Swadseva
+            </h1>
           </Link>
         </div>
+
         <div className="text-left m-auto ml-4 flex">
           <CIcon
             className="text-gray-800 w-[1rem] mr-1"
