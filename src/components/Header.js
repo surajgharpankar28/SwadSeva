@@ -73,21 +73,23 @@ const Header = () => {
                 Home
               </Link>
             </li>
-            <li className="flex items-center px-4 text-center hover:text-orange-500">
+            {/* <li className="flex items-center px-4 text-center hover:text-orange-500">
               <CIcon className="text-gray-800 w-[1.5rem] mr-2" icon={cilInfo} />
               <Link to="/about" className="align-middle">
                 About us
               </Link>
-            </li>
-            <li className="flex items-center px-4 text-center hover:text-orange-500">
+            </li> */}
+            {/* <li className="flex items-center px-4 text-center hover:text-orange-500">
               <CIcon
                 className="text-gray-800 w-[1.5rem] mr-2"
                 icon={cilContact}
               />
+              
               <Link to="/contact" className="align-middle">
                 Contact us
               </Link>
-            </li>
+            </li> */}
+
             <li className="flex items-center px-4 text-center hover:text-orange-500">
               <CIcon className="text-gray-800 w-[1.5rem] mr-2" icon={cilCart} />
               <Link to="/cart" className="align-middle">
