@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
-import { useState, useEffect } from "react";
+import React, { useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestroCard, { withPromotedLabel } from "./RestroCard";
-import Shimmer from "./Shimmer";
+import Shimmer, { CuratedFoodTypeShimmer } from "./Shimmer";
 import CuratedFoodType from "./CuratedFoodType";
 import UserContext from "../utils/UserContext";
 import { SWADSEVA_API_URL } from "../utils/constants";
+import { CIcon } from "@coreui/icons-react";
+import { cilSearch } from "@coreui/icons";
 
 const Body = () => {
   const [listofRestaurants, setListofRestaurants] = useState([]);
@@ -34,7 +36,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(SWADSEVA_API_URL);
-      console.log(SWADSEVA_API_URL);
+      // console.log(SWADSEVA_API_URL);
       // Check if the response is OK (status 200-299)
       if (!data.ok) {
         throw new Error(`HTTP error! Status: ${data.status}`);
@@ -44,7 +46,7 @@ const Body = () => {
       const cards = json.data.cards;
 
       // Continue processing the cards data here
-      console.log(cards);
+      // console.log(cards);
 
       // Variables to hold the found data
       let curatedFoodType = null;
@@ -116,11 +118,11 @@ const Body = () => {
       }
 
       // Log the data for debugging
-      console.log("Curated Food Type:", curatedFoodType);
-      console.log("Top in City:", topInCity);
-      console.log("Top in City - Cards:", topInCityRestro_Cards);
-      console.log("List of Restaurants:", listOfRestaurants);
-      console.log("City Restro:", cityRestro);
+      // console.log("Curated Food Type:", curatedFoodType);
+      // console.log("Top in City:", topInCity);
+      // console.log("Top in City - Cards:", topInCityRestro_Cards);
+      // console.log("List of Restaurants:", listOfRestaurants);
+      // console.log("City Restro:", cityRestro);
     } catch (error) {
       // Log or display the error
       console.error("Error fetching or processing data:", error.message);
@@ -129,14 +131,14 @@ const Body = () => {
 
   //search-bar
   const [searchTerm, setSearchTerm] = useState("");
-  console.log("Search Rendered");
+  // console.log("Search Rendered");
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Search Term:", searchTerm);
+    // console.log("Search Term:", searchTerm);
   };
 
   const clearSearchInput = () => {
@@ -144,86 +146,73 @@ const Body = () => {
   };
 
   const { loggedInUser, setUserName } = useContext(UserContext);
+  // console.log(loggedInUser);
+
+  const scrollContainerRef = useRef(null); // Reference to the scrollable container
+
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const scrollAmount = 300; // Adjust scroll amount as needed
+
+      if (direction === "left") {
+        container.scrollLeft -= scrollAmount;
+      } else if (direction === "right") {
+        container.scrollLeft += scrollAmount;
+      }
+    }
+  };
 
   return (
     <div className="body mx-auto max-w-[80%] ">
       <main>
         <div className="filter flex items-center">
-          <div className="search px-4">
+          {/* Search Bar */}
+
+          <div className="search px-4 mt-4 text-center m-auto">
             <div>
-              <form onSubmit={handleSubmit}>
+              <form
+                onSubmit={handleSubmit}
+                className="flex items-center justify-center"
+              >
                 <input
-                  className="pl-1 border borer-solid border-black rounded-lg"
+                  className="pl-3 py-2 border border-solid border-black focus:border-orange-500 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
                   type="text"
-                  placeholder="search restaurant"
+                  placeholder="Search restaurant"
                   value={searchTerm}
                   onChange={handleSearch}
                 />
                 <button
-                  className="px-4 py-1 bg-green-200 m-4 rounded-lg"
+                  className="px-2 py-2 bg-orange-500 text-white rounded-r-lg hover:bg-orange-400 focus:outline-none"
                   type="submit"
                   onClick={() => {
-                    //filter logic
+                    // Filter logic
                     const filteredList = listofRestaurants.filter((res) =>
                       res?.info?.name
                         .toLowerCase()
                         .includes(searchTerm.toLowerCase())
                     );
-                    console.log("Button Clicked");
+                    // console.log("Button Clicked");
                     setFilteredRestaurants(filteredList);
-                    console.log(filteredList);
+                    // console.log(filteredList);
                     if (searchTerm) {
                       hideComponent();
                     }
                   }}
                 >
-                  Search
+                  <CIcon
+                    className="text-white w-[1.5rem] mr-2"
+                    icon={cilSearch}
+                  />
                 </button>
               </form>
             </div>
           </div>
-          <div className="items-center m-4 px-4">
-            <button
-              className="px-4 py-2 bg-gray-200 rounded-lg"
-              onClick={() => {
-                console.log("Button Clicked");
-                //filter logic
-                const filteredList = listofRestaurants.filter(
-                  (res) => res.info.avgRating > 4.3
-                );
-                hideComponent();
-                setFilteredRestaurants(filteredList);
-                console.log(filteredList);
-              }}
-            >
-              Top Rated Restaurant
-            </button>
-            <button
-              className="top-rated-btn px-4 underline"
-              onClick={() => {
-                console.log("Button Clicked");
-                //filter logic
-                setFilteredRestaurants(listofRestaurants);
-                showComponent();
-                clearSearchInput();
-              }}
-            >
-              Clear
-            </button>
-          </div>
-        </div>
-        <div className="m-4 p-4 flex items-center">
-          <label>Username : </label>
-          <input
-            className="border border-black p-2 m-2"
-            value={loggedInUser}
-            onChange={(e) => setUserName(e.target.value)}
-          />
         </div>
 
         <div className="curatedFoodtype-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 ? (
-            <Shimmer />
+            <CuratedFoodTypeShimmer />
           ) : (
             isVisible && (
               <>
@@ -237,8 +226,12 @@ const Body = () => {
                     </div>
                   </div>
 
-                  <div className="relative w-full ">
-                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
+                  <div className="relative w-full">
+                    {/* Scrollable container */}
+                    <div
+                      className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory relative"
+                      ref={scrollContainerRef} // Set the reference to the scroll container
+                    >
                       <div className="row flex">
                         {curatedFoodType_Cards.map((curated) => (
                           <div key={curated.id}>
@@ -250,6 +243,48 @@ const Body = () => {
                         ))}
                       </div>
                     </div>
+
+                    {/* Left Arrow */}
+                    <div
+                      className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
+                      onClick={() => scroll("left")} // Scroll left when clicked
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </div>
+
+                    {/* Right Arrow */}
+                    <div
+                      className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
+                      onClick={() => scroll("right")} // Scroll right when clicked
+                    >
+                      <svg
+                        className="w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </>
@@ -258,7 +293,11 @@ const Body = () => {
         </div>
 
         {isVisible ? (
-          <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-2" />
+          <div className="relative my-4">
+            <div className="absolute inset-0 top-1/2 mx-[calc(10%+52px)]">
+              <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent shadow-xl"></div>
+            </div>
+          </div>
         ) : null}
 
         <div className="TopInCity-container flex flex-wrap justify-center">
@@ -268,7 +307,7 @@ const Body = () => {
             isVisible && (
               <>
                 <div className="p-4 overflow-hidden">
-                  <div className="titleDiv">
+                  <div className="titleDiv py-4">
                     <div>
                       <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
                         {topInCity.header?.title}
@@ -277,7 +316,64 @@ const Body = () => {
                     </div>
                   </div>
                   <div className="relative w-full">
-                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory">
+                    {/* Left Scroll Arrow */}
+                    <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
+                      <button
+                        onClick={() => {
+                          document.querySelector(
+                            ".scroll-container"
+                          ).scrollLeft -= 200;
+                        }}
+                        className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M15 19l-7-7 7-7"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Right Scroll Arrow */}
+                    <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
+                      <button
+                        onClick={() => {
+                          document.querySelector(
+                            ".scroll-container"
+                          ).scrollLeft += 200;
+                        }}
+                        className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M9 5l7 7-7 7"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Scrollable Container */}
+                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory scroll-container">
                       <div className="row flex">
                         {topInCityRestro_Cards.map((topInCity) => (
                           <div key={topInCity.id}>
@@ -289,8 +385,6 @@ const Body = () => {
                         ))}
                       </div>
                     </div>
-
-                    {}
                   </div>
                 </div>
               </>
@@ -299,12 +393,16 @@ const Body = () => {
         </div>
 
         {isVisible ? (
-          <hr className="border border-[rgba(2,6,12,0.10)] mx-[calc(10%+52px)] my-2" />
+          <div className="relative my-4">
+            <div className="absolute inset-0 top-1/2 mx-[calc(10%+52px)]">
+              <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent shadow-xl"></div>
+            </div>
+          </div>
         ) : null}
 
         <div className="restaurant-container">
           <div className="p-4 overflow-hidden">
-            <div className="titleDiv">
+            <div className="titleDiv py-4">
               <div>
                 <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
                   {cityRestro}
@@ -314,20 +412,18 @@ const Body = () => {
             </div>
           </div>
           <div className="flex flex-wrap justify-center">
-            {listofRestaurants.length === 0 ? (
-              <Shimmer />
-            ) : (
-              filteredRestaurants.map((restaurant) =>
-                restaurant.info.avgRating > 4.4 ? (
-                  <RestroCardPromoted
-                    resData={restaurant}
-                    key={restaurant.info.id}
-                  />
-                ) : (
-                  <RestroCard resData={restaurant} key={restaurant.info.id} />
-                )
-              )
-            )}
+            {listofRestaurants.length === 0
+              ? ""
+              : filteredRestaurants.map((restaurant) =>
+                  restaurant.info.avgRating > 4.4 ? (
+                    <RestroCardPromoted
+                      resData={restaurant}
+                      key={restaurant.info.id}
+                    />
+                  ) : (
+                    <RestroCard resData={restaurant} key={restaurant.info.id} />
+                  )
+                )}
           </div>
         </div>
       </main>

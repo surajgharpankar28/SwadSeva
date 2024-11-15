@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
-import Shimmer from "./Shimmer";
+import Shimmer, { MenuShimmer } from "./Shimmer";
 import RestroCategory from "./RestroCategory";
-
+import { CON_URL } from "../utils/constants";
+import { CIcon } from "@coreui/icons-react";
+import {
+  cilLocationPin,
+  cilStar,
+  cilAvTimer,
+  cilMoney,
+  cilFastfood,
+} from "@coreui/icons";
 const RestroMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
 
   const [showIndex, setShowIndex] = useState(0);
 
-  if (!resInfo) return <Shimmer />;
+  if (!resInfo) return <MenuShimmer />;
 
   // Destructure only if the restaurant ID matches
   const restaurantInfo = resInfo?.cards[2]?.card?.card?.info;
@@ -25,8 +33,11 @@ const RestroMenu = () => {
     costForTwoMessage,
     areaName,
     avgRating,
+    cloudinaryImageId,
     totalRatingsString,
   } = restaurantInfo || {};
+
+  const { deliveryTime } = restaurantInfo.sla || {};
 
   const cards =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
@@ -50,24 +61,63 @@ const RestroMenu = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     ) || [];
 
-  console.log(categories);
+  // console.log(categories);
 
   return (
-    <div className="text-center">
-      <h1 className="font-bold text-2xl my-10">{name}</h1>
-      <p className="font-bold">
-        {cuisines.join(", ")} - {costForTwoMessage}
-      </p>
+    <div className="w-12/12 text-center">
+      <div className="w-11/12 sm:w-10/12 md:w-6/12 mx-auto my-4 bg-orange-400 shadow-lg rounded-xl overflow-hidden flex">
+        <div className="flex-shrink-0 m-3">
+          <img
+            className="w-[10rem] h-[10rem] object-cover rounded-lg"
+            src={`${CON_URL}${cloudinaryImageId}`}
+            alt={name}
+          />
+        </div>
+        <div className="flex-1 p-4 text-left">
+          <h1 className="font-semibold text-2xl text-gray-800">{name}</h1>
 
-      {categories.map((category, index) => (
-        <RestroCategory
-          categoryData={category?.card?.card}
-          key={category?.card?.card.name}
-          showItems={index === showIndex && true}
-          setShowIndex={() => setShowIndex(index)}
-          setShowItems={() => setShowIndex(false)}
-        />
-      ))}
+          <div className="flex items-center mt-2 text-sm text-gray-700 mb-2">
+            <span className="flex">
+              <CIcon className="text-gray-800 w-[1rem] mr-1" icon={cilStar} />
+              {avgRating} |{" "}
+              <CIcon
+                className="text-gray-800 w-[1rem] ml-1  mr-1"
+                icon={cilAvTimer}
+              />
+              {deliveryTime} mins |
+              <CIcon
+                className="text-gray-800 w-[1rem] ml-1 mr-1"
+                icon={cilMoney}
+              />{" "}
+              {costForTwoMessage}
+            </span>
+          </div>
+
+          <p className="text-sm text-gray-700 mt-1 flex">
+            <CIcon className="text-gray-800 w-[1rem] mr-1" icon={cilFastfood} />
+            {cuisines.join(", ")}
+          </p>
+
+          <div className="mt-1 text-sm flex">
+            <CIcon className="text-gray-800 w-[1rem]" icon={cilLocationPin} />
+            <span className=" text-gray-700">{areaName}</span>
+          </div>
+        </div>
+      </div>
+
+      {categories.length > 0 ? (
+        categories.map((category, index) => (
+          <RestroCategory
+            categoryData={category?.card?.card}
+            key={category?.card?.card.name}
+            showItems={index === showIndex && true}
+            setShowIndex={() => setShowIndex(index)}
+            setShowItems={() => setShowIndex(false)}
+          />
+        ))
+      ) : (
+        <div className="h-[100%] "> No data</div>
+      )}
     </div>
   );
 };

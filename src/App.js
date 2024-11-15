@@ -12,24 +12,29 @@ import UserClass from "./components/UserClass";
 import RestroMenu from "./components/RestroPage";
 import Footer from "./components/Footer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
 
   useEffect(() => {
     const data = {
-      name: "Suraj Gharpankar",
+      name: "Suraj SG",
     };
     setUserName(data.name);
-  });
+  }, []);
   return (
     <div className="App">
-      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-        <Header />
+      <Provider store={appStore}>
+        <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+          <Header />
 
-        <Outlet />
-        {/* <Footer /> */}
-      </UserContext.Provider>
+          <Outlet />
+          <Footer />
+        </UserContext.Provider>
+      </Provider>
     </div>
   );
 };
@@ -56,6 +61,10 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
         path: "/restaurants/:resId",
         element: <RestroMenu />,
       },
@@ -63,6 +72,7 @@ const appRouter = createBrowserRouter([
     errorElement: <Error />,
   },
 ]);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(<RouterProvider router={appRouter} />);

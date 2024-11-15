@@ -59,38 +59,46 @@ export const CuratedFoodTypeShimmer = () => {
 
 export const MenuShimmer = () => {
   return (
-    <>
-      <div className="w-7/12 m-auto justify-center p-4">
-        <div className="flex justify-between h-40 cursor-pointer shimmer-card animate-pulse mb-2">
-          <span className=" font-bold w-full h-full bg-gray-300 rounded"></span>
-          {/* <span className="shimmer-icon w-5 h-5 bg-gray-300 rounded"></span> */}
+    <div className="restaurant-menu shimmer-width">
+      <div className="restaurant-summary stroke-color animate">
+        <img className="shimmer-img stroke animate" />
+        <div className="restaurant-summary-details">
+          <h2 className="shimmer-menu-title  stroke animate"></h2>
+          <p className="shimmer-items stroke animate"></p>
+          <div className="shimmer-details">
+            <div className="shimmer-details-rating stroke animate"></div>
+            <div className="shimmer-details-rating stroke animate"></div>
+            <div className="shimmer-details-rating stroke animate"></div>
+          </div>
         </div>
-
-        {Array(shimmer_menu_card_unit)
-          .fill("")
-          .map((_, index) => (
-            <div className=" p-2 m-2 text-center flex justify-between shimmer-card animate-pulse">
-              <div className="w-9/12">
-                <div className="py-2 flex items-center space-x-2">
-                  <div className="w-5 h-5 bg-gray-300 rounded-full"></div>
-                  <div className="w-1/2 h-5 bg-gray-300 rounded"></div>
-                </div>
-                <div className="mt-1">
-                  <p className="text-xs w-[80%] h-4 bg-gray-300 rounded mb-2"></p>
-                  <p className="text-xs w-[80%] h-4 bg-gray-300 rounded mb-2"></p>
-                  <p className="text-xs w-[80%] h-4 bg-gray-300 rounded mb-2"></p>
-                </div>
-              </div>
-              <div className="w-3/12 flex align-bottom items-center">
-                <div className="relative">
-                  <div className="w-[130px] h-[90px] bg-gray-300 rounded-lg mb-2"></div>
-                  <div className="p-2 w-16 h-6 bg-gray-300 rounded-lg "></div>
-                </div>
-              </div>
-            </div>
-          ))}
       </div>
-    </>
+
+      <div className="restaurant-menu-content">
+        <div className="menu-items-container">
+          <div className="menu-title-wrap ">
+            <h3 className="shimmer-menu-content stroke animate"></h3>
+            <p className="shimmer-menu-count stroke animate"></p>
+          </div>
+          <div className="menu-items-list">
+            {Array(shimmer_menu_card_unit)
+              .fill("")
+              .map((element, index) => (
+                <div className="shimmer-menu-card" key={index.toString() + 1}>
+                  <div className="shimmer-item-details">
+                    <h3 className="shimmer-w50  stroke animate"></h3>
+                    <p className="shimmer-w20  stroke animate"> </p>
+                    <p className="shimmer-w70  stroke animate"></p>
+                  </div>
+                  <div className="shimmer-img-wrapper">
+                    <img className="shimmer-img stroke animate" />
+                    <div className="shimmer-btn stroke animate"> </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
