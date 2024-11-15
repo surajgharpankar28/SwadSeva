@@ -24,7 +24,7 @@ const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
 
   const handleLoginToggle = () => {
-    setBtnName((prev) => (prev === "Sign In" ? "Logout" : "Sign In"));
+    setBtnName((prev) => (prev === "Sign In" ? "Logout" : "Sign IN"));
   };
 
   return (
