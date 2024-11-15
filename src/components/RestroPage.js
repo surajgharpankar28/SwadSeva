@@ -125,7 +125,7 @@ const RestroMenu = () => {
         <>
           <div className="h-[100%] m-auto flex justify-center">
             <img
-              className="w-[20rem] rounded-[2rem] shadow-xl "
+              className="w-[20rem] rounded-[2rem]"
               src={NoFoodIcon}
               alt="App Logo"
             />
