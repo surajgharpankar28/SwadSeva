@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import AppLog from "/public/app_logo.png";
 import Swadseva from "/public/swadseva.jpg";
@@ -75,43 +77,113 @@ const Header = () => {
           } sm:flex`}
         >
           <ul className="flex space-x-4 sm:flex-row flex-col sm:w-auto w-full">
-            <li className="flex items-center px-4 text-center hover:text-orange-500">
-              <CIcon className="text-gray-800 w-[1.5rem] mr-2" icon={cilHome} />
-              <Link to="/" className="align-middle">
-                Home
-              </Link>
+            <li className="flex items-center px-4 text-center">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-orange-500 font-bold flex items-center"
+                    : "text-gray-800 flex items-center"
+                }
+              >
+                {({ isActive }) => (
+                  <div className="flex items-center">
+                    <CIcon
+                      className={
+                        isActive
+                          ? "text-orange-500 w-[1.5rem] mr-2"
+                          : "text-gray-800 w-[1.5rem] mr-2"
+                      }
+                      icon={cilHome}
+                    />
+                    <span>Home</span>
+                  </div>
+                )}
+              </NavLink>
             </li>
-            {/* <li className="flex items-center px-4 text-center hover:text-orange-500">
-              <CIcon className="text-gray-800 w-[1.5rem] mr-2" icon={cilInfo} />
-              <Link to="/about" className="align-middle">
-                About us
-              </Link>
-            </li> */}
-            {/* <li className="flex items-center px-4 text-center hover:text-orange-500">
-              <CIcon
-                className="text-gray-800 w-[1.5rem] mr-2"
-                icon={cilContact}
-              />
-              
-              <Link to="/contact" className="align-middle">
-                Contact us
-              </Link>
+            {/* <li className="flex items-center px-4 text-center">
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-orange-500 font-bold flex items-center"
+                    : "text-gray-800 flex items-center"
+                }
+              >
+                {({ isActive }) => (
+                  <div className="flex items-center">
+                    <CIcon
+                      className={
+                        isActive
+                          ? "text-orange-500 w-[1.5rem] mr-2"
+                          : "text-gray-800 w-[1.5rem] mr-2"
+                      }
+                      icon={cilInfo}
+                    />
+                    <span>About us</span>
+                  </div>
+                )}
+              </NavLink>
             </li> */}
 
-            <li className="flex items-center px-4 text-center hover:text-orange-500">
-              <CIcon className="text-gray-800 w-[1.5rem] mr-2" icon={cilCart} />
-              <Link to="/cart" className="align-middle">
-                Cart{" "}
-                {cartItems.length > 0 ? (
-                  <span className="border border-gray-500 font-bold rounded-full px-2 ml-1 border-orange-500">
-                    {cartItems.length}
-                  </span>
-                ) : (
-                  ""
+            {/* <li className="flex items-center px-4 text-center">
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-orange-500 font-bold flex items-center"
+                    : "text-gray-800 flex items-center"
+                }
+              >
+                {({ isActive }) => (
+                  <div className="flex items-center">
+                    <CIcon
+                      className={
+                        isActive
+                          ? "text-orange-500 w-[1.5rem] mr-2"
+                          : "text-gray-800 w-[1.5rem] mr-2"
+                      }
+                      icon={cilContact}
+                    />
+                    <span>Contact us</span>
+                  </div>
                 )}
-              </Link>
+              </NavLink>
+            </li> */}
+
+            <li className="flex items-center px-4 text-center">
+              <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-orange-500 font-bold flex items-center"
+                    : "text-gray-800 flex items-center"
+                }
+              >
+                {({ isActive }) => (
+                  <div className="flex items-center">
+                    <CIcon
+                      className={
+                        isActive
+                          ? "text-orange-500 w-[1.5rem] mr-2"
+                          : "text-gray-800 w-[1.5rem] mr-2"
+                      }
+                      icon={cilCart}
+                    />
+                    <span>
+                      Cart{" "}
+                      {cartItems.length > 0 && (
+                        <span className="border border-gray-500 font-bold rounded-full px-2 ml-1 border-orange-500">
+                          {cartItems.length}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                )}
+              </NavLink>
             </li>
-            <li className="flex items-center px-4 text-center hover:text-orange-500">
+
+            <li className="flex items-center px-4 text-center">
               <button
                 className="login-btn flex items-center"
                 onClick={handleLoginToggle}
