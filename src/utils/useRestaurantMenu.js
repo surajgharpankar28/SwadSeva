@@ -10,7 +10,7 @@ const useRestaurantMenu = (resId) => {
   }, []);
 
   const fetchMenu = async () => {
-    console.log("MENU API Link = " + MENU_API + resId);
+    //console.log("MENU API Link = " + MENU_API + resId);
     const data = await fetch(MENU_API + resId);
     if (!data.ok) {
       const err = data.status;

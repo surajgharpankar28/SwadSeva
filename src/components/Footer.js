@@ -1,40 +1,56 @@
-import React from "react";
+import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 
 const Footer = () => {
   return (
-    <div className=" flex flex-col w-full left-0 bottom-0 right-0">
-      <footer class="mt-auto z-20 p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2024{" "}
-          <a href="https://flowbite.com/" class="hover:underline">
-            SwadSeva
-          </a>
-          . All Rights Reserved.
-        </span>
-        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-          <li>
-            <a href="#" class="hover:underline me-4 md:me-6">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#" class="hover:underline me-4 md:me-6">
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a href="#" class="hover:underline me-4 md:me-6">
-              Licensing
-            </a>
-          </li>
-          <li>
-            <a href="#" class="hover:underline">
-              Contact
-            </a>
-          </li>
-        </ul>
-      </footer>
-    </div>
+    <footer className="w-full bg-gradient-to-r from-orange-400 to-orange-500 shadow">
+      <div className="max-w-screen-xl mx-auto px-4 py-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          {/* Brand and Copyright */}
+          <div className="text-white text-sm">
+            © {new Date().getFullYear()} SwadSeva. All rights reserved.
+          </div>
+
+          {/* Creator and Social Links */}
+          <div className="flex items-center gap-4">
+            <span className="text-white text-sm">
+              Created by Suraj Gharpankar
+            </span>
+            <div className="flex gap-3">
+              <a
+                href="https://github.com/surajgharpankar28"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-orange-200 transition-colors"
+              >
+                <Github size={20} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/surajgharpankar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-orange-200 transition-colors"
+              >
+                <Linkedin size={20} />
+              </a>
+              <a
+                href="https://x.com/surajgharpankar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-orange-200 transition-colors"
+              >
+                <Twitter size={20} />
+              </a>
+              <a
+                href="mailto:surajgharpankar28@gmail.com"
+                className="text-white hover:text-orange-200 transition-colors"
+              >
+                <Mail size={20} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

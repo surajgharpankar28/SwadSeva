@@ -27,8 +27,8 @@ const RestroCard = ({ resData }) => {
   // Utility function to format cuisines
   const formatCuisines = () => {
     const cuisineString = cuisines.join(", ");
-    return cuisineString.length > 30
-      ? `${cuisineString.slice(0, 30)}...`
+    return cuisineString.length > 25
+      ? `${cuisineString.slice(0, 25)}...`
       : cuisineString;
   };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RestroMenuItems, { RestroMenuItemsInCart } from "./RestroMenuItems";
 import { clearCart } from "../utils/slices/cartSlice";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -24,7 +25,12 @@ const Cart = () => {
             Clear Cart
           </button>
         ) : (
-          <h3>Your cart is empty</h3>
+          <h3>
+            Your cart is empty, Go to{" "}
+            <Link className="text-blue-800 font-bold" to="/">
+              Home
+            </Link>{" "}
+          </h3>
         )}
 
         <RestroMenuItems menuItem={cartItems} key={cartItems}></RestroMenuItems>
