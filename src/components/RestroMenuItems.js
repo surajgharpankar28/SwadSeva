@@ -4,9 +4,11 @@ import isVeg from "../../public/veg-icon.svg";
 import isNonVeg from "../../public/non-veg-icon.svg";
 import logo from "../../public/app_logo.png";
 import { useDispatch } from "react-redux";
-import { addItems } from "../utils/slices/cartSlice";
+import { addItems, removeItem } from "../utils/slices/cartSlice";
+import { CIcon } from "@coreui/icons-react";
+import { cilCart } from "@coreui/icons";
 
-const RestroMenuItems = ({ menuItem }) => {
+const RestroMenuItems = ({ menuItem, index }) => {
   // console.log(menuItem);
   const [imageFailed, setImageFailed] = useState(false); // Initialize state to manage image failure
   const imgfilter = {
@@ -18,6 +20,10 @@ const RestroMenuItems = ({ menuItem }) => {
   const handleAddItem = (item) => {
     //Dispatch an Action
     dispatch(addItems(item));
+  };
+  const handleRemoveItem = (item) => {
+    //Dispatch an Action
+    dispatch(removeItem(item.uniqueId));
   };
 
   return (
@@ -121,7 +127,7 @@ const RestroMenuItems = ({ menuItem }) => {
               className="absolute bottom-0 left-0 w-full bg-orange-500 text-white font-semibold text-lg flex justify-center items-center rounded-b-lg hover:bg-orange-400 transition-all duration-300"
               onClick={() => handleAddItem(item)}
             >
-              <span className="mr-2 text-md">+</span>
+              <CIcon className="text-black w-[1.2rem] my-1" icon={cilCart} />{" "}
             </button>
           </div>
         </div>
