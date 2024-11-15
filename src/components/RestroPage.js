@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import NoFoodIcon from "/public/no-food.png";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { MenuShimmer } from "./Shimmer";
 import RestroCategory from "./RestroCategory";
@@ -122,7 +122,20 @@ const RestroMenu = () => {
           />
         ))
       ) : (
-        <div className="h-[100%] "> No data</div>
+        <>
+          <div className="h-[100%] m-auto flex justify-center">
+            <img
+              className="w-[20rem] rounded-[2rem]"
+              src={NoFoodIcon}
+              alt="App Logo"
+            />
+          </div>
+          <div className="flex justify-center items-center">
+            <h3 className="font-semibold mt-2 text-md text-center">
+              No options available
+            </h3>
+          </div>
+        </>
       )}
     </div>
   );
