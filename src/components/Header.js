@@ -33,7 +33,7 @@ const Header = () => {
         <div className="logo-container mt-2 mb-2">
           <Link to="/" className="flex items-center">
             <img
-              className="w-14 rounded-[2rem] ml-10 shadow-xl"
+              className="w-12 rounded-[2rem] ml-10 shadow-xl"
               src={AppLog}
               alt="App Logo"
             />
