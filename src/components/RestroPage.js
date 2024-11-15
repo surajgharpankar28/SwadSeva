@@ -132,7 +132,7 @@ const RestroMenu = () => {
           </div>
           <div className="flex justify-center items-center">
             <h3 className="font-semibold mt-2 text-md text-center">
-              No option available currently
+              No option available
             </h3>
           </div>
         </>
