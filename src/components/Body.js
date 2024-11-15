@@ -36,7 +36,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(SWADSEVA_API_URL);
-      console.log(SWADSEVA_API_URL);
+      // console.log(SWADSEVA_API_URL);
       // Check if the response is OK (status 200-299)
       if (!data.ok) {
         throw new Error(`HTTP error! Status: ${data.status}`);
@@ -46,7 +46,7 @@ const Body = () => {
       const cards = json.data.cards;
 
       // Continue processing the cards data here
-      console.log(cards);
+      // console.log(cards);
 
       // Variables to hold the found data
       let curatedFoodType = null;
@@ -118,11 +118,11 @@ const Body = () => {
       }
 
       // Log the data for debugging
-      console.log("Curated Food Type:", curatedFoodType);
-      console.log("Top in City:", topInCity);
-      console.log("Top in City - Cards:", topInCityRestro_Cards);
-      console.log("List of Restaurants:", listOfRestaurants);
-      console.log("City Restro:", cityRestro);
+      // console.log("Curated Food Type:", curatedFoodType);
+      // console.log("Top in City:", topInCity);
+      // console.log("Top in City - Cards:", topInCityRestro_Cards);
+      // console.log("List of Restaurants:", listOfRestaurants);
+      // console.log("City Restro:", cityRestro);
     } catch (error) {
       // Log or display the error
       console.error("Error fetching or processing data:", error.message);
@@ -131,14 +131,14 @@ const Body = () => {
 
   //search-bar
   const [searchTerm, setSearchTerm] = useState("");
-  console.log("Search Rendered");
+  // console.log("Search Rendered");
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Search Term:", searchTerm);
+    // console.log("Search Term:", searchTerm);
   };
 
   const clearSearchInput = () => {
@@ -146,7 +146,7 @@ const Body = () => {
   };
 
   const { loggedInUser, setUserName } = useContext(UserContext);
-  console.log(loggedInUser);
+  // console.log(loggedInUser);
 
   const scrollContainerRef = useRef(null); // Reference to the scrollable container
 
@@ -192,9 +192,9 @@ const Body = () => {
                         .toLowerCase()
                         .includes(searchTerm.toLowerCase())
                     );
-                    console.log("Button Clicked");
+                    // console.log("Button Clicked");
                     setFilteredRestaurants(filteredList);
-                    console.log(filteredList);
+                    // console.log(filteredList);
                     if (searchTerm) {
                       hideComponent();
                     }
