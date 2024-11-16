@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CuratedFoodType from "./CuratedFoodType";
 
 // shimmer card unit
@@ -27,31 +27,84 @@ const CardShimmer = () => {
 };
 
 export const CuratedFoodTypeShimmer = () => {
+  const centerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh", // Full viewport height for centering
+    textAlign: "center",
+    position: "absolute", // Position above all other content
+    top: 0,
+    left: 0,
+    width: "100%", // Full width of the viewport
+    zIndex: 10, // Ensures it's above the shimmer cards
+    backgroundColor: "rgba(255, 255, 255, 0.8)", // Optional semi-transparent background
+  };
+
   const style = {
     height: "5rem",
   };
+
   const card = {
     width: "3rem",
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [showTimeoutMessage, setShowTimeoutMessage] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (isLoading) {
+        setShowTimeoutMessage(true);
+      }
+    }, 5000); // Timeout message after 1 second
+
+    // Cleanup timer on component unmount or when `isLoading` changes
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
   return (
     <>
-      {Array(CuratedFoodTypeShimmer_unit)
-        .fill("")
-        .map((element, index) => (
-          <>
-            <div className="shimmer-card p-4" style={card}>
-              <div className="menu-items-list">
-                <div
-                  className="shimmer-img stroke animate h-32 mb-2"
-                  style={style}
-                ></div>
+      {/* Centered Message */}
+      {showTimeoutMessage && (
+        <div style={centerStyle}>
+          <h1>
+            Still waiting?
+            <button
+              onClick={() => window.location.reload()} // Refreshes the page
+              style={{
+                marginTop: "10px",
+                paddingLeft: "5px",
+                paddingRight: "5px",
+                backgroundColor: "transparent", // No background
+                color: "#007bff", // Text color
+                border: "none", // No border
+                textDecoration: "underline", // Underline the text
+                cursor: "pointer",
+              }}
+            >
+              Refresh
+            </button>
+            the page and let’s fix that.
+          </h1>
+        </div>
+      )}
 
-                <div className="shimmer-details flex space-x-2">
-                  <div className="shimmer-details-rating stroke animate w-6 h-6"></div>
-                </div>
+      {/* Shimmer Cards */}
+      {Array(10) // Replace 10 with CuratedFoodTypeShimmer_unit as needed
+        .fill("")
+        .map((_, index) => (
+          <div key={index} className="shimmer-card p-4" style={card}>
+            <div className="menu-items-list">
+              <div
+                className="shimmer-img stroke animate h-32 mb-2"
+                style={style}
+              ></div>
+              <div className="shimmer-details flex space-x-2">
+                <div className="shimmer-details-rating stroke animate w-6 h-6"></div>
               </div>
             </div>
-          </>
+          </div>
         ))}
     </>
   );
