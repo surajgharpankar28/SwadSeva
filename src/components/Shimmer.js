@@ -57,7 +57,7 @@ export const CuratedFoodTypeShimmer = () => {
       if (isLoading) {
         setShowTimeoutMessage(true);
       }
-    }, 5000); // Timeout message after 1 second
+    }, 10000); // Timeout message after 10 second
 
     // Cleanup timer on component unmount or when `isLoading` changes
     return () => clearTimeout(timer);
