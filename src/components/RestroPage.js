@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import NoFoodIcon from "/public/no-food.png";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { MenuShimmer } from "./Shimmer";
@@ -70,7 +70,16 @@ const RestroMenu = () => {
   // console.log(categories);
 
   return (
-    <div className="w-12/12 text-center">
+    <div className="w-12/12">
+      <div className="w-11/12 sm:w-10/12 md:w-6/12 mx-auto my-4">
+        <span className="text-[10px] text-gray-400">
+          <Link to="/" className="hover:text-gray-600">
+            Home
+          </Link>{" "}
+          / Kolhapur /{" "}
+          <span className="font-semibold text-gray-600">{name}</span>
+        </span>
+      </div>
       <div className="w-11/12 sm:w-10/12 md:w-6/12 mx-auto my-4 bg-orange-400 shadow-lg rounded-xl overflow-hidden flex">
         <div className="flex-shrink-0 m-3">
           <img
