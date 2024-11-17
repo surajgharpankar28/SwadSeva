@@ -414,18 +414,26 @@ const Body = () => {
             </div>
           </div>
           <div className="flex flex-wrap justify-center">
-            {listofRestaurants.length === 0
-              ? ""
-              : filteredRestaurants.map((restaurant) =>
-                  restaurant.info.avgRating > 4.4 ? (
-                    <RestroCardPromoted
-                      resData={restaurant}
-                      key={restaurant.info.id}
-                    />
-                  ) : (
-                    <RestroCard resData={restaurant} key={restaurant.info.id} />
-                  )
-                )}
+            {listofRestaurants.length === 0 ? (
+              ""
+            ) : filteredRestaurants.length > 0 ? (
+              filteredRestaurants.map((restaurant) =>
+                restaurant.info.avgRating > 4.4 ? (
+                  <RestroCardPromoted
+                    resData={restaurant}
+                    key={restaurant.info.id}
+                  />
+                ) : (
+                  <RestroCard resData={restaurant} key={restaurant.info.id} />
+                )
+              )
+            ) : (
+              <div className="flex justify-start self-start mr-auto pl-[2rem]">
+                <h1 className="font-semibold text-lg text-left flex">
+                  No results found
+                </h1>
+              </div>
+            )}
           </div>
         </div>
       </main>
