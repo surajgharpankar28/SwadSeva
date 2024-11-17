@@ -7,13 +7,15 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Brand and Copyright */}
           <div className="text-white text-sm">
-            © {new Date().getFullYear()} SwadSeva. All rights reserved.
+            © {new Date().getFullYear()}{" "}
+            <span className="font-semibold">SwadSeva.</span> All rights
+            reserved.
           </div>
 
           {/* Creator and Social Links */}
           <div className="flex items-center gap-4">
             <span className="text-white text-sm">
-              Created by Suraj Gharpankar
+              Created by <span className="font-semibold">Suraj Gharpankar</span>
             </span>
             <div className="flex gap-3">
               <a
