@@ -71,16 +71,7 @@ const RestroMenu = () => {
 
   return (
     <div className="w-12/12">
-      <div className="w-11/12 sm:w-10/12 md:w-6/12 mx-auto my-4">
-        <span className="text-[10px] text-gray-400">
-          <Link to="/" className="hover:text-gray-600">
-            Home
-          </Link>{" "}
-          / Kolhapur /{" "}
-          <span className="font-semibold text-gray-600">{name}</span>
-        </span>
-      </div>
-      <div className="w-11/12 sm:w-10/12 md:w-6/12 mx-auto my-4 bg-orange-400 shadow-lg rounded-xl overflow-hidden flex">
+      <div className="w-11/12 sm:w-10/12 md:w-8/12 lg:w-6/12 mx-auto my-4 bg-orange-400 shadow-lg rounded-xl overflow-hidden flex flex-row">
         <div className="flex-shrink-0 m-3">
           <img
             className="w-[10rem] h-[10rem] object-cover rounded-lg"
@@ -88,22 +79,22 @@ const RestroMenu = () => {
             alt={name}
           />
         </div>
-        <div className="flex-1 p-4 text-left">
+        <div className="flex-1  p-4 text-left">
           <h1 className="font-semibold text-2xl text-gray-800">{name}</h1>
-
-          <div className="flex items-center mt-2 text-sm text-gray-700 mb-2">
-            <span className="flex">
+          <div class="flex items-center mt-2 text-sm text-gray-700  flex-wrap sm:flex-nowrap">
+            <span class="flex items-center pr-2">
               <CIcon className="text-gray-800 w-[1rem] mr-1" icon={cilStar} />
-              {avgRating} |{" "}
-              <CIcon
-                className="text-gray-800 w-[1rem] ml-1  mr-1"
-                icon={cilAvTimer}
-              />
-              {deliveryTime} mins |
+              {avgRating}
+            </span>
+            <span class="flex items-center pr-2">
               <CIcon
                 className="text-gray-800 w-[1rem] ml-1 mr-1"
-                icon={cilMoney}
-              />{" "}
+                icon={cilAvTimer}
+              />
+              {deliveryTime} mins
+            </span>
+            <span class="flex items-center">
+              <CIcon className="text-gray-800 w-[1rem] mr-1" icon={cilMoney} />
               {costForTwoMessage}
             </span>
           </div>
@@ -115,7 +106,7 @@ const RestroMenu = () => {
 
           <div className="mt-1 text-sm flex">
             <CIcon className="text-gray-800 w-[1rem]" icon={cilLocationPin} />
-            <span className=" text-gray-700">{areaName}</span>
+            <span className="text-gray-700">{areaName}</span>
           </div>
         </div>
       </div>
