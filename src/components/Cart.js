@@ -120,7 +120,7 @@ const Cart = () => {
                     </>
                   )}
                 </div>
-                {itemPrice < deliveryFee && (
+                {itemPrice < freeDeliveryOnwards && (
                   <div className="w-full flex justify-start pl-5 text-left text-gray-700 mb-2">
                     <span className="text-xs text-gray-500">
                       Add ₹{availFreeDelivery} worth of items to avail free
