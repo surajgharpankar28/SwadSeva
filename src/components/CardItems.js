@@ -4,11 +4,15 @@ import isVeg from "../../public/veg-icon.svg";
 import isNonVeg from "../../public/non-veg-icon.svg";
 import logo from "../../public/app_logo.png";
 import { useDispatch } from "react-redux";
-import { addItems, removeItem } from "../utils/slices/cartSlice";
+import {
+  addItems,
+  updateItemQuantity,
+  removeItem,
+} from "../utils/slices/cartSlice";
 import { CIcon } from "@coreui/icons-react";
 import { CIcon } from "@coreui/icons-react";
 import { cilPlus, cilMinus } from "@coreui/icons";
-const CartItems = ({ menuItem, index }) => {
+const CartItems = ({ menuItem, quantity, addItemQuantity }) => {
   // console.log(menuItem);
   const [imageFailed, setImageFailed] = useState(false); // Initialize state to manage image failure
   const imgfilter = {
@@ -17,13 +21,23 @@ const CartItems = ({ menuItem, index }) => {
 
   //used for cartItem - Add button
   const dispatch = useDispatch();
-  const handleAddItem = (item) => {
-    //Dispatch an Action
-    dispatch(addItems(item));
+  // const handleAddItem = (item) => {
+  //   //Dispatch an Action
+  //   dispatch(addItems(item));
+  // };
+
+  // const handleAddToCart = (item) => {
+  //   dispatch(addItems({ ...item, quantity: 1 })); // Add item with a default quantity
+  // };
+
+  const handleAddToCart = (item) => {
+    // Dispatch the action with the uniqueId and a quantity of 1 (since you're adding one item)
+    dispatch(addItems({ uniqueId: item.uniqueId, ...item, quantity: 1 }));
   };
+
   const handleRemoveItem = (item) => {
-    //Dispatch an Action
-    dispatch(removeItem(item.uniqueId));
+    // Dispatch the removeItem action with the uniqueId
+    dispatch(removeItem({ uniqueId: item.uniqueId }));
   };
 
   return (
@@ -31,7 +45,7 @@ const CartItems = ({ menuItem, index }) => {
       {menuItem.map((item) => (
         <>
           <div
-            key={item.card.info.id}
+            key={item.uniqueId}
             className="flex items-center justify-between p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 mb-4"
           >
             {/* Left Section: Item Info */}
@@ -125,25 +139,30 @@ const CartItems = ({ menuItem, index }) => {
                 }}
               />
               <div className="flex flex-row mt-2">
-                <button
+                {/* <button
                   className=" bottom-0 left-0 w-10  font-semibold flex justify-center items-center  transition-all duration-300"
                   onClick={() => handleAddItem(item)}
+                > */}
+                <button
+                  className=" bottom-0 left-0 w-10  font-semibold flex justify-center items-center  transition-all duration-300"
+                  onClick={() => handleAddToCart(item)}
                 >
                   <CIcon
-                    className="text-black font-bold w-[1.2rem] hover:text-orange-500 mr-2"
+                    className="text-black font-bold w-[1.2rem] hover:text-orange-500 "
                     icon={cilPlus}
                   />
-                  
                 </button>
+                <span className="border px-2 rounded-full text-orange-500 border-orange-500">
+                  {item.quantity}
+                </span>
                 <button
                   className=" bottom-0 left-0 w-10  font-semibold  flex justify-center items-center transition-all duration-300"
                   onClick={() => handleRemoveItem(item)}
                 >
                   <CIcon
-                    className="text-black w-[1.2rem] hover:text-orange-500 mr-2"
+                    className="text-black w-[1.2rem] hover:text-orange-500"
                     icon={cilMinus}
                   />{" "}
-                  
                 </button>
               </div>
             </div>

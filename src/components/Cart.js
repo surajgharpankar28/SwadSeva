@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../utils/slices/cartSlice";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { cilCart, cilHome } from "@coreui/icons";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items); // Get cart items from Redux store
+  console.log(cartItems);
   const dispatch = useDispatch();
 
   // Handler to clear the cart
@@ -20,7 +21,10 @@ const Cart = () => {
     return cartItems.reduce((total, item) => {
       return (
         total +
-        (item.card.info?.price / 100 || item.card.info.defaultPrice / 100 || 0)
+        (item.card.info?.price / 100 ||
+          item.card.info.defaultPrice / 100 ||
+          0) *
+          item.quantity
       );
     }, 0);
   };
