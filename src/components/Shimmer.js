@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import CuratedFoodType from "./CuratedFoodType";
 
 // shimmer card unit
-const shimmer_card_unit = 8;
+const shimmer_card_unit = 4;
 
 // CuratedFoodTypeShimmer unit
-const CuratedFoodTypeShimmer_unit = 5;
+const CuratedFoodTypeShimmer_unit = 3;
 
 // shimmer Menu card unit
-const shimmer_menu_card_unit = 10;
+const shimmer_menu_card_unit = 5;
 
 // Shimmer card to display with animation
 const CardShimmer = () => {
@@ -91,10 +91,10 @@ export const CuratedFoodTypeShimmer = () => {
       )}
 
       {/* Shimmer Cards */}
-      {Array(10) // Replace 10 with CuratedFoodTypeShimmer_unit as needed
+      {Array(CuratedFoodTypeShimmer_unit) // Replace 10 with CuratedFoodTypeShimmer_unit as needed
         .fill("")
         .map((_, index) => (
-          <div key={index} className="shimmer-card p-4" style={card}>
+          <div key={index} className="shimmer-card p-4 pt-[5rem]" style={card}>
             <div className="menu-items-list">
               <div
                 className="shimmer-img stroke animate h-32 mb-2"
