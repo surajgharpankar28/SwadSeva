@@ -36,14 +36,15 @@ const Cart = () => {
   };
 
   const itemPrice = Math.round(calculateTotalPrice());
-  const deliveryFee = itemPrice > 400 ? 0 : 25;
-  const availFreeDelivery = 400 - itemPrice;
+  const freeDeliveryOnwards = 400;
+  const deliveryFee = itemPrice > freeDeliveryOnwards ? 0 : 25;
+  const availFreeDelivery = freeDeliveryOnwards - itemPrice;
   const discount = 30;
   const platformFee = 6;
   const GST = Math.round(itemPrice * 0.18);
 
   const toPay = new Intl.NumberFormat("en-IN").format(
-    Math.round(itemPrice + deliveryFee + platformFee + itemPrice * 0.18 - 30)
+    Math.round(itemPrice + deliveryFee + platformFee + GST - discount)
   );
 
   return (
@@ -103,7 +104,7 @@ const Cart = () => {
                   <span className="text-sm">₹{itemPrice}</span>
                 </div>
                 <div className="flex justify-between px-5 text-gray-700 mb-2">
-                  {itemPrice < 300 ? (
+                  {itemPrice < freeDeliveryOnwards ? (
                     <>
                       <span className="text-sm"> Delivery Fee :</span>
                       <span className="text-sm">₹{deliveryFee}</span>
@@ -119,7 +120,7 @@ const Cart = () => {
                     </>
                   )}
                 </div>
-                {itemPrice < 300 && (
+                {itemPrice < deliveryFee && (
                   <div className="w-full flex justify-start pl-5 text-left text-gray-700 mb-2">
                     <span className="text-xs text-gray-500">
                       Add ₹{availFreeDelivery} worth of items to avail free
