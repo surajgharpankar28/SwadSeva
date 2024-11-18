@@ -12,7 +12,10 @@ import {
   cilAvTimer,
   cilMoney,
   cilFastfood,
+  cilArrowCircleRight,
 } from "@coreui/icons";
+import { useSelector } from "react-redux";
+
 const RestroMenu = () => {
   useEffect(() => {
     // Scroll to top on component mount
@@ -23,6 +26,10 @@ const RestroMenu = () => {
   const resInfo = useRestaurantMenu(resId);
 
   const [showIndex, setShowIndex] = useState(0);
+  const cartItems = useSelector((store) => store.cart.items);
+  const cartItemsQuantity = cartItems.reduce((totalQuantity, item) => {
+    return totalQuantity + (item.quantity || 0); // Add each item's quantity to the total
+  }, 0);
 
   if (!resInfo) return <MenuShimmer />;
 
@@ -139,6 +146,23 @@ const RestroMenu = () => {
             </h3>
           </div>
         </>
+      )}
+
+      {cartItems.length > 0 && (
+        <div className="flex justify-center items-center w-full bottom-0 sticky border block sm:hidden">
+          <button className="flex justify-between text-white w-[80%] px-4 py-2 h-8 bg-orange-500 font-semibold rounded-lg text-center justify-center items-center">
+            <span className="font-semibold px-2 ml-1">
+              {cartItemsQuantity} item added
+            </span>
+            <span className="flex font-semibold">
+              View Cart{" "}
+              <CIcon
+                className="text-white w-[1.1rem] ml-2 hover:text-orange-500"
+                icon={cilArrowCircleRight}
+              />
+            </span>
+          </button>
+        </div>
       )}
     </div>
   );
