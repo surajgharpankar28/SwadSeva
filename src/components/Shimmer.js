@@ -113,7 +113,7 @@ export const CuratedFoodTypeShimmer = () => {
 export const MenuShimmer = () => {
   return (
     <>
-      <div className="w-11/12 sm:w-10/12 md:w-8/12 lg:w-6/12 m-auto p-4">
+      <div className="w-12/12 sm:w-10/12 md:w-8/12 lg:w-6/12 m-auto p-4">
         <div className="flex justify-between h-40 cursor-pointer shimmer-card animate-pulse mb-2">
           <span className="font-bold w-full h-full bg-gray-300 rounded"></span>
         </div>
