@@ -57,7 +57,7 @@ export const CuratedFoodTypeShimmer = () => {
       if (isLoading) {
         setShowTimeoutMessage(true);
       }
-    }, 10000); // Timeout message after 10 second
+    }, 15000); // Timeout message after 10 second
 
     // Cleanup timer on component unmount or when `isLoading` changes
     return () => clearTimeout(timer);
@@ -113,17 +113,19 @@ export const CuratedFoodTypeShimmer = () => {
 export const MenuShimmer = () => {
   return (
     <>
-      <div className="w-7/12 m-auto justify-center p-4">
+      <div className="w-12/12 sm:w-10/12 md:w-8/12 lg:w-6/12 m-auto p-4">
         <div className="flex justify-between h-40 cursor-pointer shimmer-card animate-pulse mb-2">
-          <span className=" font-bold w-full h-full bg-gray-300 rounded"></span>
-          {/* <span className="shimmer-icon w-5 h-5 bg-gray-300 rounded"></span> */}
+          <span className="font-bold w-full h-full bg-gray-300 rounded"></span>
         </div>
 
         {Array(shimmer_menu_card_unit)
           .fill("")
           .map((_, index) => (
-            <div className=" p-2 m-2 text-center flex justify-between shimmer-card animate-pulse">
-              <div className="w-9/12">
+            <div
+              className="p-2 m-2 text-center flex flex-col sm:flex-row justify-between shimmer-card animate-pulse"
+              key={index}
+            >
+              <div className="w-full sm:w-8/12">
                 <div className="py-2 flex items-center space-x-2">
                   <div className="w-5 h-5 bg-gray-300 rounded-full"></div>
                   <div className="w-1/2 h-5 bg-gray-300 rounded"></div>
@@ -134,7 +136,7 @@ export const MenuShimmer = () => {
                   <p className="text-xs w-[80%] h-4 bg-gray-300 rounded mb-2"></p>
                 </div>
               </div>
-              <div className="w-3/12 flex align-bottom items-center">
+              <div className="w-full sm:w-4/12 flex align-bottom items-center">
                 <div className="relative">
                   <div className="w-[130px] h-[90px] bg-gray-300 rounded-lg mb-2"></div>
                   <div className="p-2 w-16 h-6 bg-gray-300 rounded-lg "></div>

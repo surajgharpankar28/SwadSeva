@@ -18,8 +18,8 @@ const RestroMenuItems = ({ menuItem, index }) => {
   //used for cartItem - Add button
   const dispatch = useDispatch();
   const handleAddItem = (item) => {
-    //Dispatch an Action
-    dispatch(addItems(item));
+    // Dispatch the action with the uniqueId and a quantity of 1 (since you're adding one item)
+    dispatch(addItems({ uniqueId: item.uniqueId, ...item, quantity: 1 }));
   };
   const handleRemoveItem = (item) => {
     //Dispatch an Action
@@ -79,23 +79,19 @@ const RestroMenuItems = ({ menuItem, index }) => {
             <div className="flex items-center space-x-2 mt-1">
               <span className="text-xl font-bold text-black-600">
                 ₹
-                {new Intl.NumberFormat("en-IN").format(
-                  Math.round(
-                    item.card.info?.price / 100 ||
-                      item.card.info?.variantsV2?.variantGroups[0]
-                        ?.variations[1]?.price / 100 ||
-                      item.card.info?.variantsV2?.pricingModels[0]?.price /
-                        100 ||
-                      item.card.info.defaultPrice / 100
-                  )
-                )}
+                {/* item.card.info?.variantsV2?.variantGroups[0]?.variations[1]
+                    ?.price / 100 || */}
+                {item.card.info?.price / 100 ||
+                  item.card.info?.variantsV2?.pricingModels[0]?.price / 100 ||
+                  item.card.info.defaultPrice / 100}
               </span>
             </div>
             <div className="text-left text-sm pt-2">
               <p className="pb-2">
                 {item.card.info.ratings.aggregatedRating.rating && (
                   <span className="text-green-700">
-                    ✮{item.card.info.ratings.aggregatedRating.rating}{" "}
+                    <span className="text-lg">✮</span>
+                    {item.card.info.ratings.aggregatedRating.rating}{" "}
                   </span>
                 )}
                 {item.card.info.ratings.aggregatedRating.ratingCountV2 && (

@@ -34,9 +34,9 @@ const RestroCard = ({ resData }) => {
 
   console.log();
   return (
-    <div className="pr-8 pl-4 pb-6">
+    <div className="pr-4 pl-4 pb-6 w-full sm:w-[15rem] flex-shrink-0">
       <Link to={`/restaurants/${id}`}>
-        <div className="w-[15rem] h-[20rem] rounded-lg overflow-hidden shadow-lg hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out transform">
+        <div className="h-[20rem] rounded-lg overflow-hidden shadow-lg hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out transform">
           <div className="relative w-full h-40">
             <img
               className="w-full h-full object-cover rounded-t-lg"
@@ -107,8 +107,8 @@ const RestroCard = ({ resData }) => {
 export const withPromotedLabel = (RestroCard) => {
   return (props) => {
     return (
-      <div>
-        <label className="absolute bg-gradient-to-r from-[#FF6347] via-[#FF4500] to-[#FF1493] text-white text-sm font-semibold px-[5px] py-[5px] rounded-full shadow-lg transform scale-90 hover:scale-100 hover:animate-pulse transition-all duration-300 ease-in-out z-10 m-0">
+      <div className="w-full sm:w-[15rem] flex-shrink-0">
+        <label className=" absolute bg-gradient-to-r from-[#FF6347] via-[#FF4500] to-[#FF1493] text-white text-sm font-semibold px-[5px] py-[5px] rounded-full shadow-lg transform scale-90 hover:scale-100 hover:animate-pulse transition-all duration-300 ease-in-out z-10 m-0">
           Promoted
         </label>
 

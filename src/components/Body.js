@@ -169,227 +169,201 @@ const Body = () => {
   };
 
   return (
-    <div className="body mx-auto max-w-[80%] ">
+    <div className="body mx-auto max-w-full sm:max-w-[80%] px-4">
       <main>
-        <div className="filter flex items-center">
+        <div className="filter flex flex-col sm:flex-row items-center">
           {/* Search Bar */}
-
-          <div className="search px-4 mt-4 text-center m-auto">
-            <div>
-              <form
-                onSubmit={handleSubmit}
-                className="flex items-center justify-center"
-              >
-                <input
-                  className="h-auto w-[25rem] pl-3 py-2 border border-solid border-black focus:border-orange-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
-                  type="text"
-                  placeholder="Search restaurant"
-                  value={searchTerm}
-                  onChange={handleSearch}
-                />
-                {searchTerm.length != 0 ? (
-                  <button
-                    className={`px-2 py-2 text-orange-500 rounded-r-l focus:outline-none ${
-                      !searchTerm
-                        ? "bg-gray-400 hover:bg-gray-400 cursor-not-allowed"
-                        : ""
-                    }`}
-                    type="submit"
-                    onClick={clearSearchInput}
-                    disabled={!searchTerm} // Disables the button if searchTerm is empty
-                  >
-                    <CIcon
-                      className="text-black hover:text-orange-500 w-[1.5rem] mr-2"
-                      icon={cilXCircle}
-                    />
-                  </button>
-                ) : null}
-              </form>
-            </div>
+          <div className="search mt-4 text-center w-full sm:w-auto m-auto">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row items-center justify-center"
+            >
+              <input
+                className="w-full sm:w-[25rem] pl-3 py-2 border border-solid border-black focus:border-orange-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
+                type="text"
+                placeholder="Search restaurant"
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              {searchTerm.length !== 0 && (
+                <button
+                  className={`px-2 py-2 text-orange-500 rounded-r-l focus:outline-none ${
+                    !searchTerm ? "bg-gray-400 cursor-not-allowed" : ""
+                  }`}
+                  type="submit"
+                  onClick={clearSearchInput}
+                  disabled={!searchTerm}
+                >
+                  <CIcon
+                    className="text-black hover:text-orange-500 w-[1.5rem] mr-2"
+                    icon={cilXCircle}
+                  />
+                </button>
+              )}
+            </form>
           </div>
         </div>
 
+        {/* Curated Food Type Section */}
         <div className="curatedFoodtype-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 && searchTerm.length === 0 ? (
             <CuratedFoodTypeShimmer />
           ) : (
             isVisible &&
             searchTerm.length === 0 && (
-              <>
-                <div className="p-4 overflow-hidden">
-                  <div className="titleDiv">
-                    <div>
-                      <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
-                        {curatedFoodType.header?.title}
-                      </h2>
-                      <div></div>
-                    </div>
-                  </div>
-
-                  <div className="relative w-full">
-                    {/* Scrollable container */}
-                    <div
-                      className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory relative"
-                      ref={scrollContainerRef} // Set the reference to the scroll container
-                    >
-                      <div className="row flex">
-                        {curatedFoodType_Cards.map((curated) => (
-                          <div key={curated.id}>
-                            <CuratedFoodType
-                              curatedData={curated}
-                              key={curated.imageGridCards?.info[0]?.id}
-                            />
-                          </div>
-                        ))}
+              <div className=" py-4 overflow-hidden w-full">
+                <div className="titleDiv">
+                  <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
+                    {curatedFoodType.header?.title}
+                  </h2>
+                </div>
+                <div className="relative w-full">
+                  {/* Scrollable container */}
+                  <div
+                    className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory relative"
+                    ref={scrollContainerRef}
+                  >
+                    {curatedFoodType_Cards.map((curated) => (
+                      <div key={curated.id}>
+                        <CuratedFoodType curatedData={curated} />
                       </div>
-                    </div>
-
-                    {/* Left Arrow */}
-                    <div
-                      className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
-                      onClick={() => scroll("left")} // Scroll left when clicked
+                    ))}
+                  </div>
+                  {/* Scroll Arrows */}
+                  <div
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
+                    onClick={() => scroll("left")}
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      <svg
-                        className="w-6 h-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M15 19l-7-7 7-7"
-                        />
-                      </svg>
-                    </div>
-
-                    {/* Right Arrow */}
-                    <div
-                      className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
-                      onClick={() => scroll("right")} // Scroll right when clicked
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-80"
+                    onClick={() => scroll("right")}
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      <svg
-                        className="w-6 h-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </div>
                 </div>
-              </>
+              </div>
             )
           )}
         </div>
-
         {isVisible && searchTerm.length === 0 ? (
           <div className="relative my-4">
-            <div className="absolute inset-0 top-1/2 mx-[calc(10%+52px)]">
+            <div className="absolute inset-0 top-1/2 mx-auto max-w-screen-lg">
               <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent shadow-xl"></div>
             </div>
           </div>
         ) : null}
 
+        {/* Top in City Section */}
         <div className="TopInCity-container flex flex-wrap justify-center">
           {curatedFoodType.length === 0 && searchTerm.length === 0 ? (
             <Shimmer />
           ) : (
             isVisible &&
             searchTerm.length === 0 && (
-              <>
-                <div className="p-4 overflow-hidden">
-                  <div className="titleDiv py-4">
-                    <div>
-                      <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
-                        {topInCity.header?.title}
-                      </h2>
-                      <div></div>
-                    </div>
+              <div className="py-4 overflow-hidden w-full">
+                <div className="titleDiv py-4">
+                  <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
+                    {topInCity.header?.title}
+                  </h2>
+                </div>
+                <div className="relative w-full">
+                  {/* Left Scroll Arrow */}
+                  <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
+                    <button
+                      onClick={() => {
+                        document.querySelector(
+                          ".scroll-container"
+                        ).scrollLeft -= 200;
+                      }}
+                      className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M15 19l-7-7 7-7"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </button>
                   </div>
-                  <div className="relative w-full">
-                    {/* Left Scroll Arrow */}
-                    <div className="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
-                      <button
-                        onClick={() => {
-                          document.querySelector(
-                            ".scroll-container"
-                          ).scrollLeft -= 200;
-                        }}
-                        className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
-                      >
-                        <svg
-                          width="20"
-                          height="20"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M15 19l-7-7 7-7"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
+                  {/* Right Scroll Arrow */}
 
-                    {/* Right Scroll Arrow */}
-                    <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
-                      <button
-                        onClick={() => {
-                          document.querySelector(
-                            ".scroll-container"
-                          ).scrollLeft += 200;
-                        }}
-                        className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
+                  <div className="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
+                    <button
+                      onClick={() => {
+                        document.querySelector(
+                          ".scroll-container"
+                        ).scrollLeft += 200;
+                      }}
+                      className="p-2 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition duration-200"
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
                       >
-                        <svg
-                          width="20"
-                          height="20"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M9 5l7 7-7 7"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
+                        <path
+                          d="M9 5l7 7-7 7"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
 
-                    {/* Scrollable Container */}
-                    <div className="flex overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory scroll-container">
-                      <div className="row flex">
-                        {searchTerm.length === 0 &&
-                          topInCityRestro_Cards.map((topInCity) => (
-                            <div key={topInCity.id}>
-                              <RestroCard
-                                resData={topInCity}
-                                key={topInCity.imageGridCards?.info[0]?.id}
-                              />
-                            </div>
-                          ))}
-                      </div>
-                    </div>
+                  <div className="flex w-full overflow-x-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory scroll-container">
+                    {searchTerm.length === 0 &&
+                      topInCityRestro_Cards.map((topInCity) => (
+                        <div
+                          className="p-0 w-full sm:w-[15rem] flex-shrink-0"
+                          key={topInCity.id}
+                        >
+                          <RestroCard resData={topInCity} />
+                        </div>
+                      ))}
                   </div>
                 </div>
-              </>
+              </div>
             )
           )}
         </div>
@@ -401,19 +375,14 @@ const Body = () => {
             </div>
           </div>
         ) : null}
-
+        {/* Restaurant Section */}
         <div className="restaurant-container">
-          <div className="p-4 overflow-hidden">
-            <div className="titleDiv py-4">
-              <div>
-                <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
-                  {cityRestro}
-                </h2>
-                <div></div>
-              </div>
-            </div>
+          <div className="py-4 overflow-hidden w-full">
+            <h2 className="title pl-4 pt-4 pb-1 font-bold text-2xl">
+              {cityRestro}
+            </h2>
           </div>
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center w-full">
             {listofRestaurants.length === 0 ? (
               ""
             ) : filteredRestaurants.length > 0 ? (
