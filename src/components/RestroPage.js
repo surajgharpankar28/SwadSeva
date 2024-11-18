@@ -149,7 +149,7 @@ const RestroMenu = () => {
       )}
 
       {cartItems.length > 0 && (
-        <div className="flex justify-center items-center w-full bottom-0 sticky block sm:hidden">
+        <div className="flex justify-center items-center w-full pb-2 bottom-0 sticky block sm:hidden">
           <button className="flex justify-between text-white w-[80%] px-4 py-2 h-8 bg-orange-500 font-semibold rounded-lg text-center justify-center items-center">
             <span className="font-semibold px-2 ml-1">
               {cartItemsQuantity} item added
