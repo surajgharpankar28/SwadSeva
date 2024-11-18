@@ -48,7 +48,7 @@ const Cart = () => {
   return (
     <div className="text-center m-4 p-4">
       <h1 className="font-bold text-2xl">My Cart</h1>
-      <div className="w-10/12 mx-auto my-4 bg-gray-100 shadow-lg p-4 text-left border rounded-2xl">
+      <div className="w-full sm:w-10/12 md:w-8/12 lg:w-10/12 mx-auto my-4 bg-gray-100 shadow-lg p-4 text-left border rounded-2xl">
         {/* Show Clear Cart button or empty cart message */}
         {cartItems.length > 0 ? (
           <>
@@ -62,7 +62,7 @@ const Cart = () => {
             </div>
             <div className="flex justify-start">
               <button
-                className="p-2 mb-2 bg-orange-400 text-black rounded-lg "
+                className="p-2 mb-2 bg-orange-400 text-black rounded-lg"
                 onClick={handleClearCart}
               >
                 <span className="flex">
@@ -77,7 +77,7 @@ const Cart = () => {
           </>
         ) : (
           <>
-            <div className="text-center  ">
+            <div className="text-center">
               <h3 className="flex justify-center font-semibold text-lg items-center mb-2">
                 Your cart is empty.
               </h3>
@@ -94,32 +94,31 @@ const Cart = () => {
         {/* List of Cart Items */}
         {cartItems.length > 0 && (
           <>
-            <div className="flex">
-              <div className="w-9/12">
+            <div className="flex flex-wrap md:flex-nowrap">
+              <div className="w-full md:w-9/12">
                 <CartItems menuItem={cartItems} key={cartItems} />
               </div>
               {/* Total Price Display */}
-              <div className="w-3/12 text-right">
+              <div className="w-full md:w-3/12 text-right mt-4 md:mt-0">
                 <span className="text-left font-semibold flex px-5 text-md mb-3">
                   Bill Details
                 </span>
                 <div className="flex justify-between px-5 text-gray-700 mb-2">
                   <span className="text-sm">
-                    {" "}
-                    Total Items({cartItemsQuantity}):
+                    Total Items ({cartItemsQuantity}):
                   </span>
-                  <span className="text-sm ">₹{itemPrice}</span>
+                  <span className="text-sm">₹{itemPrice}</span>
                 </div>
                 <div className="flex justify-between px-5 text-gray-700 mb-2">
                   {itemPrice < 300 ? (
                     <>
-                      <span className="text-sm"> Delivery Fee : </span>
-                      <span className="text-sm ">₹{deliveryFee}</span>
+                      <span className="text-sm"> Delivery Fee :</span>
+                      <span className="text-sm">₹{deliveryFee}</span>
                     </>
                   ) : (
                     <>
-                      <span className="text-sm"> Delivery Fee : </span>
-                      <span className="text-sm ">
+                      <span className="text-sm"> Delivery Fee :</span>
+                      <span className="text-sm">
                         <span className="text-green-600 font-bold pl-1">
                           Free
                         </span>
@@ -127,19 +126,17 @@ const Cart = () => {
                     </>
                   )}
                 </div>
-                {itemPrice < 300 ? (
+                {itemPrice < 300 && (
                   <div className="w-full flex justify-start pl-5 text-left text-gray-700 mb-2">
                     <span className="text-xs text-gray-500">
-                      Add ₹{availFreeDelivery} worth of items more to avail free
-                      delivery
+                      Add ₹{availFreeDelivery} worth of items to avail free
+                      delivery.
                     </span>
                   </div>
-                ) : (
-                  ""
                 )}
-                <div className="flex justify-between px-5 text-gray-700">
-                  <span className="text-sm"> Extra discount for you : </span>
-                  <span className="text-sm ">-₹{discount}</span>
+                <div className="flex justify-between px-5 text-gray-700 mb-2">
+                  <span className="text-sm"> Extra discount for you :</span>
+                  <span className="text-sm">-₹{discount}</span>
                 </div>
                 <div className="relative py-4">
                   <div className="absolute inset-0 top-1/2 mx-[calc(10%+5px)]">
@@ -147,12 +144,12 @@ const Cart = () => {
                   </div>
                 </div>
                 <div className="flex justify-between px-5 text-gray-700 mb-2">
-                  <span className="text-sm"> Platform fee : </span>
-                  <span className="text-sm ">₹{platformFee}</span>
+                  <span className="text-sm"> Platform fee :</span>
+                  <span className="text-sm">₹{platformFee}</span>
                 </div>
-                <div className="flex justify-between px-5 text-gray-700">
+                <div className="flex justify-between px-5 text-gray-700 mb-2">
                   <span className="text-sm"> GST and Restaurant Charges </span>
-                  <span className="text-sm ">₹{GST}</span>
+                  <span className="text-sm">₹{GST}</span>
                 </div>
                 <div className="relative py-4">
                   <div className="absolute inset-0 top-1/2 mx-[calc(10%+5px)]">
@@ -161,7 +158,7 @@ const Cart = () => {
                 </div>
                 <div className="flex justify-between px-5 font-semibold text-black">
                   <span className="text-sm"> TO PAY </span>
-                  <span className="text-sm ">₹{toPay}</span>
+                  <span className="text-sm">₹{toPay}</span>
                 </div>
               </div>
             </div>
