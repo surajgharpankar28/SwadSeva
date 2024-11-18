@@ -27,6 +27,7 @@ const Cart = () => {
       return (
         total +
         (item.card.info?.price / 100 ||
+          item.card.info?.variantsV2?.pricingModels[0]?.price / 100 ||
           item.card.info.defaultPrice / 100 ||
           0) *
           item.quantity

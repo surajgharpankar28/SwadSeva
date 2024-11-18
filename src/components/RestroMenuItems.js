@@ -79,16 +79,11 @@ const RestroMenuItems = ({ menuItem, index }) => {
             <div className="flex items-center space-x-2 mt-1">
               <span className="text-xl font-bold text-black-600">
                 ₹
-                {new Intl.NumberFormat("en-IN").format(
-                  Math.round(
-                    item.card.info?.price / 100 ||
-                      item.card.info?.variantsV2?.variantGroups[0]
-                        ?.variations[1]?.price / 100 ||
-                      item.card.info?.variantsV2?.pricingModels[0]?.price /
-                        100 ||
-                      item.card.info.defaultPrice / 100
-                  )
-                )}
+                {/* item.card.info?.variantsV2?.variantGroups[0]?.variations[1]
+                    ?.price / 100 || */}
+                {item.card.info?.price / 100 ||
+                  item.card.info?.variantsV2?.pricingModels[0]?.price / 100 ||
+                  item.card.info.defaultPrice / 100}
               </span>
             </div>
             <div className="text-left text-sm pt-2">
