@@ -3,7 +3,6 @@ import { CURATED_FOOD_TYPE } from "../utils/constants";
 const CuratedFoodType = (props) => {
   const { curatedData } = props;
 
-  //   console.log("Curated Card" + curatedData.imageGridCards?.info[0]?.id);
   return (
     <>
       <div className="hover:scale-105 transition-all duration-300 ease-in-out transform">
