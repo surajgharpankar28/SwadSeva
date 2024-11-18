@@ -36,8 +36,8 @@ const Cart = () => {
   };
 
   const itemPrice = Math.round(calculateTotalPrice());
-  const deliveryFee = itemPrice > 300 ? 0 : 20;
-  const availFreeDelivery = 300 - itemPrice;
+  const deliveryFee = itemPrice > 400 ? 0 : 25;
+  const availFreeDelivery = 400 - itemPrice;
   const discount = 30;
   const platformFee = 6;
   const GST = Math.round(itemPrice * 0.18);
