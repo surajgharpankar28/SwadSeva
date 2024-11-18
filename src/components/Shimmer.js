@@ -90,6 +90,7 @@ export const CuratedFoodTypeShimmer = () => {
           <p>
             I'm free instance of{" "}
             <a
+              target="_blank"
               href="https://render.com/"
               style={{
                 marginTop: "10px",
