@@ -95,7 +95,8 @@ const RestroMenuItems = ({ menuItem, index }) => {
               <p className="pb-2">
                 {item.card.info.ratings.aggregatedRating.rating && (
                   <span className="text-green-700">
-                    ✮{item.card.info.ratings.aggregatedRating.rating}{" "}
+                    <span className="text-lg">✮</span>
+                    {item.card.info.ratings.aggregatedRating.rating}{" "}
                   </span>
                 )}
                 {item.card.info.ratings.aggregatedRating.ratingCountV2 && (
