@@ -37,8 +37,7 @@ A highly scalable and performant food ordering app utilizing real-time Swiggy AP
 
 ## 💡 Special Thanks  
 
-I would like to extend my gratitude to my mentor, <a href="https://www.linkedin.com/in/akshaymarch7/" target="_blank"><b>Akshay Saini 🚀</b></a>, and the invaluable learnings from <a href="https://namastedev.com" target="_blank"><b>NamasteDev.com</b></a>.
- 
+I would like to extend my gratitude to my mentor, **[Akshay Saini](https://www.linkedin.com/in/akshaymarch7/) 🚀**, and the invaluable learnings from **[NamasteDev.com](https://namastedev.com)**.  
 
 ---
 
