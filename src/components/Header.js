@@ -50,7 +50,7 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="text-left m-auto ml-4 flex">
+        <div className="text-left m-auto ml-4 flex hidden sm:flex">
           <CIcon
             className="text-gray-800 w-[1rem] mr-1"
             icon={cilLocationPin}
@@ -61,7 +61,7 @@ const Header = () => {
         </div>
 
         {/* Hamburger Icon for mobile screens */}
-        <div className="block sm:hidden">
+        <div className="block sm:hidden flex justify-start">
           <button
             className="text-gray-800"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -74,18 +74,18 @@ const Header = () => {
         <div
           className={`nav-items flex items-center mr-4 ${
             isMenuOpen
-              ? "block absolute top-[60px] left-0 w-full bg-white shadow-lg"
+              ? "block absolute top-[60px] pb-12 left-0 w-full bg-white shadow-lg z-50 sm:hidden"
               : "hidden"
           } sm:flex`}
         >
           <ul className="flex space-x-4 sm:flex-row flex-col sm:w-auto w-full">
-            <li className="flex items-center px-4 text-center">
+            <li className="flex items-center px-4 text-center pb-4 pt-4 pl-8 sm:pb-0 sm:pt-0 sm:pl-0">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? "text-orange-500 font-bold flex items-center"
-                    : "text-gray-800 flex items-center"
+                    ? "text-orange-500 font-bold flex items-center mr-2"
+                    : "text-gray-800 flex items-center mr-2"
                 }
               >
                 {({ isActive }) => (
@@ -103,7 +103,8 @@ const Header = () => {
                 )}
               </NavLink>
             </li>
-            {/* <li className="flex items-center px-4 text-center">
+
+            {/* <li className="flex items-center px-4 text-center pb-4 sm:pb-0">
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
@@ -126,9 +127,9 @@ const Header = () => {
                   </div>
                 )}
               </NavLink>
-            </li> */}
+            </li>
 
-            {/* <li className="flex items-center px-4 text-center">
+            <li className="flex items-center px-4 text-center pb-4 sm:pb-0">
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
@@ -153,7 +154,7 @@ const Header = () => {
               </NavLink>
             </li> */}
 
-            <li className="flex items-center px-4 text-center">
+            <li className="flex items-center px-4 text-center pb-4 sm:pb-0">
               <NavLink
                 to="/cart"
                 className={({ isActive }) =>
@@ -185,7 +186,7 @@ const Header = () => {
               </NavLink>
             </li>
 
-            <li className="flex items-center px-4 text-center">
+            <li className="flex items-center px-4 text-center pb-4 sm:pb-0">
               <button
                 className="login-btn flex items-center"
                 onClick={handleLoginToggle}
