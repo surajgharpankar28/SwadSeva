@@ -195,7 +195,7 @@ const Header = () => {
                   className="text-gray-800 w-[1.5rem] mr-2"
                   icon={cilUser}
                 />
-                <span className="align-middle">{btnName}</span>
+                <span className="align-middle">Guest</span>
               </button>
             </li>
           </ul>

@@ -91,7 +91,7 @@ const RestroMenu = () => {
           <div class="flex items-center mt-2 text-sm text-gray-700  flex-wrap sm:flex-nowrap">
             <span class="flex items-center pr-2">
               <CIcon className="text-gray-800 w-[1rem] mr-1" icon={cilStar} />
-              {avgRating}
+              {avgRating} stars
             </span>
             <span class="flex items-center pr-2">
               <CIcon
