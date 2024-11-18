@@ -154,13 +154,15 @@ const RestroMenu = () => {
             <span className="font-semibold px-2 ml-1">
               {cartItemsQuantity} item added
             </span>
-            <span className="flex font-semibold">
-              View Cart{" "}
-              <CIcon
-                className="text-white w-[1.1rem] ml-2 hover:text-orange-500"
-                icon={cilArrowCircleRight}
-              />
-            </span>
+            <Link to="/cart" className="flex">
+              <span className="flex font-semibold underline underline-offset-2">
+                View Cart{" "}
+                <CIcon
+                  className="text-white w-[1.1rem] ml-2 hover:text-orange-500"
+                  icon={cilArrowCircleRight}
+                />
+              </span>
+            </Link>
           </button>
         </div>
       )}
