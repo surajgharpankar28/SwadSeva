@@ -103,7 +103,7 @@ export const CuratedFoodTypeShimmer = () => {
             >
               Render
             </a>{" "}
-            will spin down with inactivity, which can delay requests by 50
+            which will spin down with inactivity, which can delay requests by 50
             seconds or more.
           </p>
         </div>
