@@ -6,7 +6,7 @@ import CartItems from "./CardItems";
 import { CIcon } from "@coreui/icons-react";
 import { cilCart, cilHome } from "@coreui/icons";
 import Contact from "./Contact";
-
+import cartIsEmpty from "/public/cart_is_empty.png";
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items); // Get cart items from Redux store
   const cartItemsQuantity = cartItems.reduce((totalQuantity, item) => {
@@ -78,16 +78,8 @@ const Cart = () => {
           </>
         ) : (
           <>
-            <div className="text-center">
-              <h3 className="flex justify-center font-semibold text-lg items-center mb-2">
-                Your cart is empty.
-              </h3>
-              <div className="flex justify-center items-center">
-                <CIcon
-                  className="text-black w-[15rem] h-[15rem]"
-                  icon={cilCart}
-                />
-              </div>
+            <div className="flex justify-center text-center">
+              <img src={cartIsEmpty} />
             </div>
           </>
         )}
