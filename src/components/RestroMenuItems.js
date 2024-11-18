@@ -18,8 +18,8 @@ const RestroMenuItems = ({ menuItem, index }) => {
   //used for cartItem - Add button
   const dispatch = useDispatch();
   const handleAddItem = (item) => {
-    //Dispatch an Action
-    dispatch(addItems(item));
+    // Dispatch the action with the uniqueId and a quantity of 1 (since you're adding one item)
+    dispatch(addItems({ uniqueId: item.uniqueId, ...item, quantity: 1 }));
   };
   const handleRemoveItem = (item) => {
     //Dispatch an Action

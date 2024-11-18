@@ -234,10 +234,10 @@ const Body = () => {
                     >
                       <div className="row flex">
                         {curatedFoodType_Cards.map((curated) => (
-                          <div key={curated.id}>
+                          <div>
                             <CuratedFoodType
+                              key={curated.id}
                               curatedData={curated}
-                              key={curated.imageGridCards?.info[0]?.id}
                             />
                           </div>
                         ))}
@@ -378,10 +378,10 @@ const Body = () => {
                       <div className="row flex">
                         {searchTerm.length === 0 &&
                           topInCityRestro_Cards.map((topInCity) => (
-                            <div key={topInCity.id}>
+                            <div>
                               <RestroCard
                                 resData={topInCity}
-                                key={topInCity.imageGridCards?.info[0]?.id}
+                                key={topInCity.id}
                               />
                             </div>
                           ))}

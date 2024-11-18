@@ -24,7 +24,9 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext); // Destructured for simplicity
   const cartItems = useSelector((store) => store.cart.items);
-
+  const cartItemsQuantity = cartItems.reduce((totalQuantity, item) => {
+    return totalQuantity + (item.quantity || 0); // Add each item's quantity to the total
+  }, 0);
   const handleLoginToggle = () => {
     setBtnName((prev) => (prev === "Sign In" ? "Logout" : "Sign In"));
   };
@@ -174,7 +176,7 @@ const Header = () => {
                       Cart{" "}
                       {cartItems.length > 0 && (
                         <span className="border border-gray-500 font-bold rounded-full px-2 ml-1 border-orange-500">
-                          {cartItems.length}
+                          {cartItemsQuantity}
                         </span>
                       )}
                     </span>

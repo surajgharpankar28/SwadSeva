@@ -15,20 +15,9 @@ import { cilPlus, cilMinus } from "@coreui/icons";
 const CartItems = ({ menuItem, quantity, addItemQuantity }) => {
   // console.log(menuItem);
   const [imageFailed, setImageFailed] = useState(false); // Initialize state to manage image failure
-  const imgfilter = {
-    filter: "grayscale(50%)",
-  };
 
   //used for cartItem - Add button
   const dispatch = useDispatch();
-  // const handleAddItem = (item) => {
-  //   //Dispatch an Action
-  //   dispatch(addItems(item));
-  // };
-
-  // const handleAddToCart = (item) => {
-  //   dispatch(addItems({ ...item, quantity: 1 })); // Add item with a default quantity
-  // };
 
   const handleAddToCart = (item) => {
     // Dispatch the action with the uniqueId and a quantity of 1 (since you're adding one item)
@@ -171,19 +160,6 @@ const CartItems = ({ menuItem, quantity, addItemQuantity }) => {
       ))}
     </div>
   );
-};
-
-export const RestroMenuItemsInCart = (RestroMenuItems) => {
-  return (props) => {
-    return (
-      <div>
-        <label className="absolute bg-black text-white z-10 m-1 p-1 rounded-md">
-          Promoted
-        </label>
-        <CartItems {...props} />
-      </div>
-    );
-  };
 };
 
 export default CartItems;
