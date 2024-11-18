@@ -43,7 +43,7 @@ const Cart = () => {
   const GST = Math.round(itemPrice * 0.18);
 
   const toPay = new Intl.NumberFormat("en-IN").format(
-    Math.round(itemPrice + deliveryFee + platformFee + itemPrice * 0.18 - 30)
+    Math.round(itemPrice + deliveryFee + platformFee + GST - discount)
   );
 
   return (
