@@ -99,13 +99,16 @@ const RestroMenu = () => {
             </span>
           </div>
 
-          <p className="text-sm text-gray-700 mt-1 flex">
+          <p className="text-sm text-gray-700 mt-1 flex items-start ">
             <CIcon className="text-gray-800 w-[1rem] mr-1" icon={cilFastfood} />
             {cuisines.join(", ")}
           </p>
 
-          <div className="mt-1 text-sm flex">
-            <CIcon className="text-gray-800 w-[1rem]" icon={cilLocationPin} />
+          <div className="mt-1 text-sm flex items-start">
+            <CIcon
+              className="text-gray-800 w-[1rem] mr-1"
+              icon={cilLocationPin}
+            />
             <span className="text-gray-700">{areaName}</span>
           </div>
         </div>
