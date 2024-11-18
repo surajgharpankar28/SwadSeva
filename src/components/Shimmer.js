@@ -67,7 +67,7 @@ export const CuratedFoodTypeShimmer = () => {
     <>
       {/* Centered Message */}
       {showTimeoutMessage && (
-        <div style={centerStyle}>
+        <div className="flex flex-col" style={centerStyle}>
           <h1>
             Still waiting?
             <button
@@ -87,6 +87,24 @@ export const CuratedFoodTypeShimmer = () => {
             </button>
             the page and let’s fix that.
           </h1>
+          <p>
+            I'm free instance of{" "}
+            <a
+              href="https://render.com/"
+              style={{
+                marginTop: "10px",
+                backgroundColor: "transparent", // No background
+                color: "#007bff", // Text color
+                border: "none", // No border
+                textDecoration: "underline", // Underline the text
+                cursor: "pointer",
+              }}
+            >
+              Render
+            </a>{" "}
+            will spin down with inactivity, which can delay requests by 50
+            seconds or more.
+          </p>
         </div>
       )}
 
