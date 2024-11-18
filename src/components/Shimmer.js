@@ -57,7 +57,7 @@ export const CuratedFoodTypeShimmer = () => {
       if (isLoading) {
         setShowTimeoutMessage(true);
       }
-    }, 15000); // Timeout message after 10 second
+    }, 10000); // Timeout message after 10 second
 
     // Cleanup timer on component unmount or when `isLoading` changes
     return () => clearTimeout(timer);
@@ -67,7 +67,7 @@ export const CuratedFoodTypeShimmer = () => {
     <>
       {/* Centered Message */}
       {showTimeoutMessage && (
-        <div style={centerStyle}>
+        <div className="flex flex-col" style={centerStyle}>
           <h1>
             Still waiting?
             <button
@@ -87,6 +87,25 @@ export const CuratedFoodTypeShimmer = () => {
             </button>
             the page and let’s fix that.
           </h1>
+          <p>
+            I'm free instance of{" "}
+            <a
+              target="_blank"
+              href="https://render.com/"
+              style={{
+                marginTop: "10px",
+                backgroundColor: "transparent", // No background
+                color: "#007bff", // Text color
+                border: "none", // No border
+                textDecoration: "underline", // Underline the text
+                cursor: "pointer",
+              }}
+            >
+              Render
+            </a>{" "}
+            which will spin down with inactivity, which can delay requests by 50
+            seconds or more.
+          </p>
         </div>
       )}
 
