@@ -9,7 +9,6 @@ const RestroCard = ({ resData }) => {
     cuisines = [],
     avgRating,
     cloudinaryImageId,
-
     areaName,
     aggregatedDiscountInfoV3,
   } = resData?.info || {};
@@ -17,6 +16,7 @@ const RestroCard = ({ resData }) => {
   const { deliveryTime } = resData?.info.sla || {};
   const RestroImageForMenuItems = CON_URL + cloudinaryImageId;
 
+  console.log(RestroImageForMenuItems);
   // console.log(RestroImageForMenuItems);
   // Utility function to render discount info
   const renderDiscountInfo = () => {
