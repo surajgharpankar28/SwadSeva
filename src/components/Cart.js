@@ -46,7 +46,7 @@ const Cart = () => {
   const toPay = new Intl.NumberFormat("en-IN").format(
     Math.round(itemPrice + deliveryFee + platformFee + GST - discount)
   );
-
+ 
   return (
     <div className="text-center m-4 p-4">
       <h1 className="font-bold text-2xl">My Cart</h1>

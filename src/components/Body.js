@@ -38,7 +38,6 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(SWADSEVA_API_URL);
-      // console.log(SWADSEVA_API_URL);
       // Check if the response is OK (status 200-299)
       if (!data.ok) {
         throw new Error(`HTTP error! Status: ${data.status}`);
